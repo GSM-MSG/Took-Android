@@ -16,4 +16,4 @@ rootProject.name = "Took-Android"
 include ':presentation'
 include ':domain'
 include ':data'
-include ':di'
+include ':app'
