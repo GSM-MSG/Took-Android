@@ -3,11 +3,6 @@
     package="com.msg.presentation" >
 
     <application>
-        <activity
-            android:name=".MainActivity"
-            android:exported="false"
-            android:label="@string/title_activity_main"
-            android:theme="@style/Theme.TookAndroid" />
     </application>
 
 </manifest>
