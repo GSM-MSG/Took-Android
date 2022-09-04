@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    compileSdk = Versions.COMPILE_SDK_VERSION
+    compileSdk = 32
 
     defaultConfig {
-        minSdk = Versions.MIN_SDK_VERSION
-        targetSdk = Versions.TARGET_SDK_VERSION
+        minSdk = 29
+        targetSdk = 32
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -17,26 +17,20 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = "1.8"
     }
 }
 
 dependencies {
-    implementation(project(":presentation"))
-    implementation(project(":domain"))
-    implementation(project(":data"))
-
     implementation(Dependency.AndroidX.CORE_KTX)
     implementation(Dependency.AndroidX.APP_COMPAT)
     implementation(Dependency.Google.MATERIAL)

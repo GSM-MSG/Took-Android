@@ -22,6 +22,7 @@ object Dependency {
         const val APP_COMPAT = "androidx.appcompat:appcompat:${Versions.APP_COMPAT}"
 
         const val ACTIVITY_KTX = "androidx.activity:activity-ktx:${Versions.ACTIVITY_KTX}"
+        const val ACTIVITY_COMPOSE = "androidx.activity:activity-compose:${Versions.ACTIVITY_COMPOSE}"
         const val FRAGMENT_KTX = "androidx.fragment:fragment-ktx:${Versions.FRAGMENT_KTX}"
 
         const val RECYCLER_VIEW = "androidx.recyclerview:recyclerview:${Versions.RECYCLERVIEW}"
@@ -30,12 +31,25 @@ object Dependency {
             "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.LIFECYCLE_KTX}"
         const val LIFECYCLE_LIVEDATA_KTX =
             "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.LIFECYCLE_KTX}"
+        const val LIFECYCLE_RUNTIME =
+            "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.LIFECYCLE_KTX}"
 
         const val ROOM_RUNTIME = "androidx.room:room-runtime:${Versions.ROOM}"
         const val ROOM_KTX = "androidx.room:room-ktx:${Versions.ROOM}"
         const val ROOM_COMPILER = "androidx.room:room-compiler:${Versions.ROOM}"
 
         const val LEGACY_SUPPORT = "androidx.legacy:legacy-support-v4:${Versions.LEGACY}"
+    }
+
+    object Compose {
+        const val COMPOSE = "androidx.compose.ui:ui:${Versions.COMPOSE}"
+        const val COMPOSE_MATERAIL = "androidx.compose.material:material:${Versions.COMPOSE}"
+        const val COMPOSE_PREVIEW = "androidx.compose.ui:ui-tooling-preview:${Versions.COMPOSE}"
+        const val COMPOSE_TOOLING = "androidx.compose.ui:ui-tooling:${Versions.COMPOSE}"
+    }
+
+    object ComposeTest {
+       const val COMPOSE_TEST = "androidx.compose.ui:ui-test-junit4:${Versions.COMPOSE}"
     }
 
     object Google {

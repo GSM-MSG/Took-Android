@@ -18,11 +18,13 @@ object Versions {
     const val CORE_KTX = "1.5.0"
     const val APP_COMPAT = "1.4.1"
     const val ACTIVITY_KTX = "1.2.3"
+    const val ACTIVITY_COMPOSE = "1.3.1"
     const val FRAGMENT_KTX = "1.3.4"
     const val LIFECYCLE_KTX = "2.3.1"
     const val ROOM = "2.3.0"
     const val LEGACY = "1.0.0"
     const val RECYCLERVIEW = "1.1.0"
+    const val COMPOSE = "1.0.1"
 
     const val HILT = "2.38.1"
     const val MATERIAL = "1.3.0"

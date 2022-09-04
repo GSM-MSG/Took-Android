@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    compileSdk = Versions.COMPILE_SDK_VERSION
+    compileSdk = 32
 
     defaultConfig {
-        minSdk = Versions.MIN_SDK_VERSION
-        targetSdk = Versions.TARGET_SDK_VERSION
+        minSdk = 29
+        targetSdk = 32
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -33,9 +33,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":presentation"))
     implementation(project(":domain"))
-    implementation(project(":data"))
 
     implementation(Dependency.AndroidX.CORE_KTX)
     implementation(Dependency.AndroidX.APP_COMPAT)
