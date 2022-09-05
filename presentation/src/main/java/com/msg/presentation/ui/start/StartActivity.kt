@@ -5,15 +5,14 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.zIndex
+import com.msg.presentation.ui.theme.Background
 import com.msg.presentation.ui.theme.BtnGradient
 import com.msg.presentation.ui.theme.ButtonGradient
 import com.msg.presentation.ui.theme.ButtonNormal
@@ -22,12 +21,13 @@ class StartActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            Background()
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(Color.Black),
+                    .background(Color.Transparent),
+                verticalArrangement = Arrangement.Bottom,
             ) {
-                Spacer(modifier = Modifier.height(600.dp))
                 ButtonGradient(
                     onClick = { },
                     text = "회원가입",
@@ -42,6 +42,7 @@ class StartActivity : ComponentActivity() {
                     Color.Black,
                     bolder = BorderStroke(1.dp, Color.White)
                 )
+                Spacer(modifier = Modifier.height(44.dp))
             }
         }
     }
