@@ -12,7 +12,7 @@ object Versions {
     const val COMPILE_SDK_VERSION = 31
     const val BUILD_TOOLS_VERSION = "32.0.0"
     const val MIN_SDK_VERSION = 29
-    const val TARGET_SDK_VERSION = 30
+    const val TARGET_SDK_VERSION = 31
 
     const val CONSTRAINT_LAYOUT = "2.1.2"
     const val CORE_KTX = "1.5.0"

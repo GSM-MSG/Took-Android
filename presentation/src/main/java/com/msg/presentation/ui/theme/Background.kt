@@ -7,14 +7,14 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.blur
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.tooling.preview.Preview
 import com.msg.presentation.R
 
 @Composable
-fun TookBackground() {
+fun Background() {
+
     Row(
         modifier = Modifier
             .background(Color.Black)
@@ -22,11 +22,18 @@ fun TookBackground() {
         verticalAlignment = Alignment.CenterVertically
     ) {
         Image(
-            painterResource(id = R.drawable.ic_bg_blur),
+            painter = painterResource(id = R.drawable.background),
             contentDescription = "blur",
             modifier = Modifier
                 .fillMaxSize()
-                .blur(100.dp)
         )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun Preview() {
+    TookAndroidTheme {
+        Background()
     }
 }
