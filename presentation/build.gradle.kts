@@ -4,12 +4,12 @@ plugins {
 }
 
 android {
-    compileSdk = 32
+    compileSdk = Versions.COMPILE_SDK_VERSION
 
     defaultConfig {
         applicationId = "com.msg.took_android"
-        minSdk = 29
-        targetSdk = 32
+        minSdk = Versions.MIN_SDK_VERSION
+        targetSdk = Versions.TARGET_SDK_VERSION
         versionCode = 1
         versionName = "1.0"
 
