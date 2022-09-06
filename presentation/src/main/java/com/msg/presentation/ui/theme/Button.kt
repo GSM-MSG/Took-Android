@@ -1,5 +1,6 @@
 package com.msg.presentation.ui.theme
 
+import android.net.Uri
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -73,14 +74,14 @@ fun ButtonGradient(
 fun ButtonAddCard(
     onClick: () -> Unit,
     text: String,
-    uri: String?
+    uri: Uri?
 ) {
     if (uri == null) {
         Button(
             onClick = onClick,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 16.dp, vertical = 0.dp)
+                .padding(horizontal = 16.dp)
                 .height(207.dp),
             colors = ButtonDefaults.buttonColors(
                 backgroundColor = Color.Gray.copy(alpha = 0f),
