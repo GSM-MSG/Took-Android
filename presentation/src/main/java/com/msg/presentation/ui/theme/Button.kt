@@ -1,6 +1,5 @@
 package com.msg.presentation.ui.theme
 
-import android.net.Uri
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
