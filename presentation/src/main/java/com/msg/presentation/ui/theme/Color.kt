@@ -7,7 +7,12 @@ val Purple500 = Color(0xFF6200EE)
 val Purple700 = Color(0xFF3700B3)
 val Teal200 = Color(0xFF03DAC5)
 
-val BtnGradient = listOf(
-    Color(0xFF553AE8),
-    Color(0xFFE46EE5)
+val BtnGradientPurple = listOf(
+    Color(0xFF6841E8),
+    Color(0xFF8D4FE7)
+)
+
+val BtnGradientGray = listOf(
+    Color(0xFF5F5F5F),
+    Color(0xFF727272)
 )
