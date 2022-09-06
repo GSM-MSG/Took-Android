@@ -7,6 +7,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
@@ -68,6 +69,18 @@ fun ButtonGradient(
             ButtonText(text = text)
         }
     }
+}
+
+@Composable
+fun ButtonDisable(
+    onClick: () -> Unit,
+    text: String,
+    gradient: Brush,
+    enabledGradient: Brush,
+    enabled: Boolean
+) {
+    if(enabled) ButtonGradient(onClick = {  }, text = text, gradient = enabledGradient)
+    else ButtonGradient(onClick = { onClick() }, text = text, gradient = gradient)
 }
 
 @Composable
