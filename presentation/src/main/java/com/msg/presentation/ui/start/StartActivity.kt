@@ -7,11 +7,9 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.zIndex
 import com.msg.presentation.ui.theme.Background
 import com.msg.presentation.ui.theme.BtnGradient
 import com.msg.presentation.ui.theme.ButtonGradient
