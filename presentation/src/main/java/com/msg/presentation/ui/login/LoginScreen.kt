@@ -19,7 +19,7 @@ fun LoginScreen(back: () -> Unit) {
     var password by remember { mutableStateOf<String?>(null) }
     Background()
     Column {
-        Box(
+        Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(44.dp)
@@ -34,11 +34,7 @@ fun LoginScreen(back: () -> Unit) {
                     },
                 tint = Color.White
             )
-            Row(
-                modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center
-            ) {
-                Text(text = "로그인", color = Color.White)
-            }
+            Text(text = "로그인", color = Color.White)
         }
         Spacer(modifier = Modifier.height(32.dp))
         Text(text = "이메일", color = Color.White, modifier = Modifier.padding(start = 16.dp))
