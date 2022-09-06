@@ -56,6 +56,7 @@ dependencies {
     implementation(Dependency.Compose.COMPOSE)
     implementation(Dependency.Compose.COMPOSE_MATERAIL)
     implementation(Dependency.Compose.COMPOSE_PREVIEW)
+    implementation(Dependency.Compose.COMPOSE_NAV)
     implementation(Dependency.AndroidX.LIFECYCLE_RUNTIME)
     implementation(Dependency.AndroidX.ACTIVITY_COMPOSE)
     testImplementation(Dependency.UnitTest.JUNIT)

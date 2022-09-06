@@ -25,6 +25,7 @@ object Versions {
     const val LEGACY = "1.0.0"
     const val RECYCLERVIEW = "1.1.0"
     const val COMPOSE = "1.0.1"
+    const val COMPOSE_NAV = "2.5.1"
 
     const val HILT = "2.38.1"
     const val MATERIAL = "1.3.0"
