@@ -7,6 +7,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.sp
 import com.msg.presentation.R
 
@@ -19,6 +20,20 @@ fun ButtonText(text: String) {
             fontFamily = font,
             fontWeight = FontWeight.Bold,
             fontSize = 14.sp,
+            color = Color.White
+        )
+    )
+}
+
+@Composable
+fun DefalutText(text: String, fontSize: Int) {
+    val font = FontFamily(Font(R.font.sfpro, FontWeight.Bold))
+    Text(
+        text = text,
+        style = TextStyle(
+            fontFamily = font,
+            fontWeight = FontWeight.Bold,
+            fontSize = fontSize.sp,
             color = Color.White
         )
     )

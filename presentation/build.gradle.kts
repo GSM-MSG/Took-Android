@@ -58,6 +58,7 @@ dependencies {
     implementation(Dependency.Compose.COMPOSE_PREVIEW)
     implementation(Dependency.AndroidX.LIFECYCLE_RUNTIME)
     implementation(Dependency.AndroidX.ACTIVITY_COMPOSE)
+    implementation(Dependency.Compose.COMPOSE_ICONS)
     testImplementation(Dependency.UnitTest.JUNIT)
     androidTestImplementation(Dependency.AndroidTest.ANDROID_JUNIT)
     androidTestImplementation(Dependency.AndroidTest.ESPRESSO_CORE)

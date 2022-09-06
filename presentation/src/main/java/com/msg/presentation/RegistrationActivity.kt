@@ -5,6 +5,13 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AddCircle
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowBackIos
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -20,6 +27,8 @@ class RegistrationActivity : ComponentActivity() {
         setContent {
             Background()
             Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Bottom) {
+                TopBar()
+                Spacer(modifier = Modifier.height(32.dp))
                 AddCard()
                 Spacer(modifier = Modifier.height(140.dp))
                 RegisterBtn()
@@ -62,6 +71,25 @@ fun AddCard() {
             text = "뒷면 등록하기",
             uri = null
         )
+    }
+}
+
+@Preview
+@Composable
+fun TopBar() {
+    Box(modifier = Modifier.fillMaxWidth()) {
+        IconButton(onClick = { }) {
+            Icon(
+                Icons.Default.ArrowBackIos,
+                contentDescription = "",
+                tint = Color.White,
+                modifier = Modifier.padding(start = 16.dp)
+            )
+        }
+        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
+            DefalutText(text = "명함 등록", 17)
+        }
+
     }
 }
 
