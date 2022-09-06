@@ -1,6 +1,8 @@
 package com.msg.presentation.ui.theme
 
+import android.net.Uri
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
@@ -8,7 +10,10 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.Icon
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -36,7 +41,7 @@ fun ButtonNormal(
         shape = RoundedCornerShape(16.dp),
         border = bolder
     ) {
-        Text(text = text)
+        ButtonText(text = text)
     }
 }
 
@@ -60,7 +65,39 @@ fun ButtonGradient(
                 .background(brush = gradient, shape = RoundedCornerShape(16.dp)),
             contentAlignment = Alignment.Center
         ) {
-            Text(text = text)
+            ButtonText(text = text)
         }
     }
 }
+
+@Composable
+fun ButtonAddCard(
+    onClick: () -> Unit,
+    text: String,
+    uri: Uri?
+) {
+    if (uri == null) {
+        Button(
+            onClick = onClick,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp)
+                .height(207.dp),
+            colors = ButtonDefaults.buttonColors(
+                backgroundColor = Color.Gray.copy(alpha = 0f),
+                contentColor = Color.White
+            ),
+            shape = RoundedCornerShape(10.dp),
+            border = BorderStroke(0.7.dp, Color.White)
+        ) {
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                Icon(Icons.Default.AddCircle, contentDescription = "")
+                Spacer(modifier = Modifier.height(10.dp))
+                ButtonText(text = text)
+            }
+        }
+    } else {
+
+    }
+}
+
