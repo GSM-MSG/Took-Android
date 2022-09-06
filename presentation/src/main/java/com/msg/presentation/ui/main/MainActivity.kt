@@ -1,4 +1,4 @@
-package com.msg.presentation
+package com.msg.presentation.ui.main
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
