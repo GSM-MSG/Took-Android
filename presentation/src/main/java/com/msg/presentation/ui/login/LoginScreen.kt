@@ -10,7 +10,10 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.msg.presentation.R
 import com.msg.presentation.ui.theme.*
 
 @Composable
@@ -37,21 +40,21 @@ fun LoginScreen(back: () -> Unit) {
             Row(
                 modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center
             ) {
-                Text(text = "로그인", color = Color.White)
+                Text(text = stringResource(id = R.string.login), color = Color.White)
             }
         }
         Spacer(modifier = Modifier.height(32.dp))
-        Text(text = "이메일", color = Color.White, modifier = Modifier.padding(start = 16.dp))
+        Text(text = stringResource(id = R.string.email), color = Color.White, modifier = Modifier.padding(start = 16.dp))
         Spacer(modifier = Modifier.height(4.dp))
-        TextFieldNormal(text = email ?: "", textChange = { email = it }, "이메일을 입력해 주세요.")
+        TextFieldNormal(text = email ?: "", textChange = { email = it }, stringResource(id = R.string.write_email))
         Spacer(modifier = Modifier.height(24.dp))
-        Text(text = "비밀번호", color = Color.White, modifier = Modifier.padding(start = 16.dp))
+        Text(text = stringResource(id = R.string.password), color = Color.White, modifier = Modifier.padding(start = 16.dp))
         Spacer(modifier = Modifier.height(4.dp))
-        TextFieldNormal(text = password ?: "", textChange = { password = it }, "비밀번호를 입력해 주세요.")
+        TextFieldNormal(text = password ?: "", textChange = { password = it }, stringResource(id = R.string.write_password))
         Spacer(modifier = Modifier.weight(1f))
         ButtonDisable(
             onClick = { },
-            text = "로그인",
+            text = stringResource(id = R.string.login),
             gradient = Brush.linearGradient(BtnGradientPurple),
             enabledGradient = Brush.linearGradient(
                 BtnGradientGray
@@ -63,11 +66,11 @@ fun LoginScreen(back: () -> Unit) {
             horizontalArrangement = Arrangement.Center,
             modifier = Modifier.fillMaxWidth()
         ) {
-            Text(text = "비밀번호 찾기", color = Color.White)
+            Text(text = stringResource(id = R.string.find_password), color = Color.White)
             Spacer(modifier = Modifier.width(12.dp))
             Text(text = "|", color = Color.White)
             Spacer(modifier = Modifier.width(12.dp))
-            Text(text = "회원가입", color = Color.White)
+            Text(text = stringResource(id = R.string.registration), color = Color.White)
         }
         Spacer(modifier = Modifier.height(17.dp))
     }

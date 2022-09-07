@@ -7,7 +7,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.msg.presentation.R
 import com.msg.presentation.ui.theme.Background
 import com.msg.presentation.ui.theme.BtnGradientPurple
 import com.msg.presentation.ui.theme.ButtonGradient
@@ -26,7 +28,7 @@ fun StartScreen(
     ) {
         ButtonGradient(
             onClick = { },
-            text = "회원가입",
+            text = stringResource(id = R.string.registration),
             Brush.linearGradient(
                 colors = BtnGradientPurple,
             )
@@ -34,7 +36,7 @@ fun StartScreen(
         Spacer(modifier = Modifier.height(16.dp))
         ButtonNormal(
             onClick = { toLogin() },
-            text = "로그인",
+            text = stringResource(id = R.string.login),
             Color.Black,
             bolder = BorderStroke(1.dp, Color.White)
         )

@@ -16,6 +16,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.msg.presentation.MainActivity
@@ -54,9 +55,9 @@ class RegistrationActivity : ComponentActivity() {
         if (frontImageUriState.value != null && backImageUriState.value != null) {
             ButtonGradient(
                 onClick = { cardRegistraion() },
-                text = "등록완료!",
+                text = stringResource(id = R.string.finish_set_card),
                 Brush.linearGradient(
-                    colors = BtnGradient,
+                    colors = BtnGradientPurple,
                 )
             )
         } else {
@@ -66,16 +67,16 @@ class RegistrationActivity : ComponentActivity() {
 
     @Composable
     fun AddCard() {
-        Column {
+        Column() {
             ButtonAddCard(
                 onClick = { addCardFront() },
-                text = "앞면 등록하기",
+                text = stringResource(id = R.string.set_card_front),
                 uri = frontImageUriState.value
             )
             Spacer(modifier = Modifier.height(20.dp))
             ButtonAddCard(
                 onClick = { addCardBack() },
-                text = "뒷면 등록하기",
+                text = stringResource(id = R.string.set_card_back),
                 uri = backImageUriState.value
             )
         }
@@ -94,7 +95,7 @@ class RegistrationActivity : ComponentActivity() {
                 )
             }
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
-                DefalutText(text = "명함 등록", 17)
+                DefalutText(text = stringResource(id = R.string.card), 17)
             }
         }
     }
