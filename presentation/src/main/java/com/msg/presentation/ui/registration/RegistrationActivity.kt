@@ -70,13 +70,13 @@ class RegistrationActivity : ComponentActivity() {
             ButtonAddCard(
                 onClick = { addCardFront() },
                 text = "앞면 등록하기",
-                uri = if (frontImageUriState.value != null) frontImageUriState.value!! else null
+                uri = frontImageUriState.value
             )
             Spacer(modifier = Modifier.height(20.dp))
             ButtonAddCard(
                 onClick = { addCardBack() },
                 text = "뒷면 등록하기",
-                uri = if (backImageUriState.value != null) backImageUriState.value!! else null
+                uri = backImageUriState.value
             )
         }
     }
