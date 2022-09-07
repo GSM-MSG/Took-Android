@@ -20,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.skydoves.landscapist.glide.GlideImage
 
 @Composable
 fun ButtonNormal(
@@ -88,7 +89,7 @@ fun ButtonAddCard(
                 contentColor = Color.White
             ),
             shape = RoundedCornerShape(10.dp),
-            border = BorderStroke(0.7.dp, Color.White)
+            border = BorderStroke(0.5.dp, Color.White)
         ) {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 Icon(Icons.Default.AddCircle, contentDescription = "")
@@ -97,7 +98,20 @@ fun ButtonAddCard(
             }
         }
     } else {
-
+        Button(
+            onClick = onClick,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp)
+                .height(207.dp),
+            colors = ButtonDefaults.buttonColors(
+                contentColor = Color.White
+            ),
+            shape = RoundedCornerShape(10.dp),
+            border = BorderStroke(0.5.dp, Color.White)
+        ) {
+            GlideImage(imageModel = uri)
+        }
     }
 }
 

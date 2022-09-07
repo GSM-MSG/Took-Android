@@ -22,7 +22,8 @@ object Dependency {
         const val APP_COMPAT = "androidx.appcompat:appcompat:${Versions.APP_COMPAT}"
 
         const val ACTIVITY_KTX = "androidx.activity:activity-ktx:${Versions.ACTIVITY_KTX}"
-        const val ACTIVITY_COMPOSE = "androidx.activity:activity-compose:${Versions.ACTIVITY_COMPOSE}"
+        const val ACTIVITY_COMPOSE =
+            "androidx.activity:activity-compose:${Versions.ACTIVITY_COMPOSE}"
         const val FRAGMENT_KTX = "androidx.fragment:fragment-ktx:${Versions.FRAGMENT_KTX}"
 
         const val RECYCLER_VIEW = "androidx.recyclerview:recyclerview:${Versions.RECYCLERVIEW}"
@@ -46,11 +47,12 @@ object Dependency {
         const val COMPOSE_MATERAIL = "androidx.compose.material:material:${Versions.COMPOSE}"
         const val COMPOSE_PREVIEW = "androidx.compose.ui:ui-tooling-preview:${Versions.COMPOSE}"
         const val COMPOSE_TOOLING = "androidx.compose.ui:ui-tooling:${Versions.COMPOSE}"
-        const val COMPOSE_ICONS = "androidx.compose.material:material-icons-extended:${Versions.COMPOSE}"
+        const val COMPOSE_ICONS =
+            "androidx.compose.material:material-icons-extended:${Versions.COMPOSE}"
     }
 
     object ComposeTest {
-       const val COMPOSE_TEST = "androidx.compose.ui:ui-test-junit4:${Versions.COMPOSE}"
+        const val COMPOSE_TEST = "androidx.compose.ui:ui-test-junit4:${Versions.COMPOSE}"
     }
 
     object Google {
@@ -109,6 +111,7 @@ object Dependency {
 
     object ImageLoad {
         const val COIL = "io.coil-kt:coil:${Versions.COIL_VERSION}"
+        const val GLIDE = "com.github.skydoves:landscapist-glide:1.4.7"
     }
 
     object Lottie {

@@ -59,6 +59,7 @@ dependencies {
     implementation(Dependency.AndroidX.LIFECYCLE_RUNTIME)
     implementation(Dependency.AndroidX.ACTIVITY_COMPOSE)
     implementation(Dependency.Compose.COMPOSE_ICONS)
+    implementation(Dependency.ImageLoad.GLIDE)
     testImplementation(Dependency.UnitTest.JUNIT)
     androidTestImplementation(Dependency.AndroidTest.ANDROID_JUNIT)
     androidTestImplementation(Dependency.AndroidTest.ESPRESSO_CORE)
