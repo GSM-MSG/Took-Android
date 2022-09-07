@@ -1,10 +1,7 @@
 package com.msg.presentation.ui.theme
 
 import android.net.Uri
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -17,6 +14,7 @@ import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
@@ -89,7 +87,7 @@ fun ButtonAddCard(
                 contentColor = Color.White
             ),
             shape = RoundedCornerShape(10.dp),
-            border = BorderStroke(0.5.dp, Color.White)
+            border = BorderStroke(0.7.dp, Color.White)
         ) {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 Icon(Icons.Default.AddCircle, contentDescription = "")
@@ -98,20 +96,18 @@ fun ButtonAddCard(
             }
         }
     } else {
-        Button(
-            onClick = onClick,
+        GlideImage(
+            imageModel = uri,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp)
-                .height(207.dp),
-            colors = ButtonDefaults.buttonColors(
-                contentColor = Color.White
-            ),
-            shape = RoundedCornerShape(10.dp),
-            border = BorderStroke(0.5.dp, Color.White)
-        ) {
-            GlideImage(imageModel = uri)
-        }
+                .height(207.dp)
+                .clip(RoundedCornerShape(10.dp))
+                .clickable(
+                    enabled = true,
+                    onClick = onClick
+                )
+        )
     }
 }
 
