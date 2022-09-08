@@ -20,7 +20,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.msg.presentation.MainActivity
 import com.msg.presentation.ui.theme.*
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class RegistrationActivity : ComponentActivity() {
 
     private var frontImageUriState = mutableStateOf<Uri?>(null)

@@ -16,7 +16,9 @@ import com.msg.presentation.ui.theme.Background
 import com.msg.presentation.ui.theme.BtnGradient
 import com.msg.presentation.ui.theme.ButtonGradient
 import com.msg.presentation.ui.theme.ButtonNormal
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class StartActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
