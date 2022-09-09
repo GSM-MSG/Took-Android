@@ -1,32 +1,30 @@
 package com.msg.presentation.ui.login
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.focus.FocusRequester
-import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.msg.presentation.R
 import com.msg.presentation.ui.theme.*
 
 @Composable
-fun LoginScreen(back: () -> Unit, toMain: () -> Unit) {
+fun LoginScreen(back: () -> Unit, toMain: () -> Unit, toSignUp: () -> Unit) {
 
     Background()
     Column {
         TookAppBar(back = { back() }, title = R.string.login)
-        loginField(toMain = { toMain() })
+        loginField(toMain = { toMain() }, toSignUp = { toSignUp() })
     }
 }
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
-fun loginField(toMain: () -> Unit) {
+fun loginField(toMain: () -> Unit, toSignUp: () -> Unit) {
     var email by remember { mutableStateOf<String?>(null) }
     var password by remember { mutableStateOf<String?>(null) }
     var visiblePassword by remember { mutableStateOf<Boolean>(false) }
@@ -64,7 +62,11 @@ fun loginField(toMain: () -> Unit) {
         )
         ErrorText(isError = isError, errorMsg = R.string.wrong_login)
         Spacer(modifier = Modifier.weight(1f))
-        loginBtn(isLogin = { isLogin() }, email = email, password = password)
+        loginBtn(
+            isLogin = { isLogin() },
+            email = email,
+            password = password,
+            toSignUp = { toSignUp() })
     }
 }
 
@@ -72,7 +74,8 @@ fun loginField(toMain: () -> Unit) {
 fun loginBtn(
     isLogin: () -> Unit,
     email: String?,
-    password: String?
+    password: String?,
+    toSignUp: () -> Unit
 ) {
     ButtonDisable(
         onClick = { isLogin() },
@@ -99,7 +102,10 @@ fun loginBtn(
         DefaultText(
             text = stringResource(id = R.string.registration),
             fontSize = 12,
-            textColor = Gray1
+            textColor = Gray1,
+            modifier = Modifier.clickable {
+                toSignUp()
+            }
         )
     }
 }

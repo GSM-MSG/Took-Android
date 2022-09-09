@@ -13,7 +13,8 @@ import com.msg.presentation.ui.theme.*
 
 @Composable
 fun StartScreen(
-    toLogin: () -> Unit
+    toLogin: () -> Unit,
+    toSignUp: () -> Unit
 ) {
     Background()
     Column(
@@ -23,7 +24,7 @@ fun StartScreen(
         verticalArrangement = Arrangement.Bottom,
     ) {
         ButtonGradient(
-            onClick = { },
+            onClick = { toSignUp() },
             text = stringResource(id = R.string.registration),
             Brush.linearGradient(
                 colors = GradientPurple,
