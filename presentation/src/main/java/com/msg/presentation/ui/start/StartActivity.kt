@@ -51,7 +51,10 @@ class StartActivity : ComponentActivity() {
                 )
             }
             composable("signup") {
-                SignUpScreen()
+                SignUpScreen(
+                    back = { navController.popBackStack() },
+                    toLogin = { navController.navigate("login") }
+                )
             }
         }
     }
