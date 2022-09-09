@@ -9,10 +9,10 @@ object Versions {
     const val KOTLINX_COROUTINES = "1.6.0"
 
     const val BUILD_GRADLE = "4.2.1"
-    const val COMPILE_SDK_VERSION = 31
+    const val COMPILE_SDK_VERSION = 32
     const val BUILD_TOOLS_VERSION = "32.0.0"
     const val MIN_SDK_VERSION = 29
-    const val TARGET_SDK_VERSION = 30
+    const val TARGET_SDK_VERSION = 32
 
     const val CONSTRAINT_LAYOUT = "2.1.2"
     const val CORE_KTX = "1.5.0"
@@ -24,7 +24,7 @@ object Versions {
     const val ROOM = "2.3.0"
     const val LEGACY = "1.0.0"
     const val RECYCLERVIEW = "1.1.0"
-    const val COMPOSE = "1.0.1"
+    const val COMPOSE = "1.2.0-alpha03"
     const val COMPOSE_NAV = "2.5.1"
 
     const val HILT = "2.38.1"
