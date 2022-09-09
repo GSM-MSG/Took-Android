@@ -2,6 +2,7 @@ package com.msg.presentation.ui.theme
 
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
@@ -26,7 +27,7 @@ fun ButtonText(text: String) {
 }
 
 @Composable
-fun DefalutText(text: String, fontSize: Int) {
+fun DefaultText(text: String, fontSize: Int, textColor: Color = Color.White, modifier: Modifier = Modifier) {
     val font = FontFamily(Font(R.font.sfpro, FontWeight.Bold))
     Text(
         text = text,
@@ -34,7 +35,8 @@ fun DefalutText(text: String, fontSize: Int) {
             fontFamily = font,
             fontWeight = FontWeight.Bold,
             fontSize = fontSize.sp,
-            color = Color.White
-        )
+            color = textColor
+        ),
+        modifier = modifier
     )
 }

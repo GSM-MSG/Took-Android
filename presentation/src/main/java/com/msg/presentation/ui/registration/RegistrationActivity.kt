@@ -95,7 +95,7 @@ class RegistrationActivity : ComponentActivity() {
                 )
             }
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
-                DefalutText(text = stringResource(id = R.string.card), 17)
+                DefaultText(text = stringResource(id = R.string.card), fontSize = 17)
             }
         }
     }
