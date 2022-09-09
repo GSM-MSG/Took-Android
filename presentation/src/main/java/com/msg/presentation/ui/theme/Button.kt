@@ -23,7 +23,7 @@ import com.skydoves.landscapist.glide.GlideImage
 @Composable
 fun ButtonNormal(
     onClick: () -> Unit,
-    text: String,
+    text: Int,
     buttonColor: Color = Transparent,
     bolder: BorderStroke? = null
 ) {
@@ -47,7 +47,7 @@ fun ButtonNormal(
 @Composable
 fun ButtonGradient(
     onClick: () -> Unit,
-    text: String,
+    text: Int,
     gradient: Brush = Brush.linearGradient(GradientGray),
 ) {
     Button(
@@ -72,7 +72,7 @@ fun ButtonGradient(
 @Composable
 fun ButtonDisable(
     onClick: () -> Unit,
-    text: String,
+    text: Int,
     gradient: Brush = Brush.linearGradient(GradientPurple),
     enabled: Boolean
 ) {
@@ -83,7 +83,7 @@ fun ButtonDisable(
 @Composable
 fun ButtonAddCard(
     onClick: () -> Unit,
-    text: String,
+    text: Int,
     uri: Uri?
 ) {
     if (uri == null) {

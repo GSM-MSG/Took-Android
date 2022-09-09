@@ -21,10 +21,10 @@ import androidx.compose.ui.unit.sp
 import com.msg.presentation.R
 
 @Composable
-fun ButtonText(text: String) {
+fun ButtonText(text: Int) {
     val font = FontFamily(Font(R.font.sfpro, FontWeight.Bold))
     Text(
-        text = text,
+        text = stringResource(id = text),
         style = TextStyle(
             fontFamily = font,
             fontWeight = FontWeight.Bold,
@@ -35,10 +35,10 @@ fun ButtonText(text: String) {
 }
 
 @Composable
-fun DefaultText(text: String, fontSize: Int, textColor: Color = White1, modifier: Modifier = Modifier) {
+fun DefaultText(text: Int, fontSize: Int, textColor: Color = White1, modifier: Modifier = Modifier) {
     val font = FontFamily(Font(R.font.sfpro, FontWeight.Bold))
     Text(
-        text = text,
+        text = stringResource(id = text),
         style = TextStyle(
             fontFamily = font,
             fontWeight = FontWeight.Bold,
@@ -64,7 +64,7 @@ fun ErrorText(isError: Boolean, errorMsg: Int) {
                 tint = Red
             )
             DefaultText(
-                text = stringResource(id = errorMsg),
+                text = errorMsg,
                 fontSize = 12,
                 textColor = Red,
                 modifier = Modifier.padding(start = 4.dp)

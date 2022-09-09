@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.msg.presentation.MainActivity
 import com.msg.presentation.R
@@ -49,7 +48,7 @@ class RegistrationActivity : ComponentActivity() {
         if (frontImageUriState.value != null && backImageUriState.value != null) {
             ButtonGradient(
                 onClick = { cardRegistraion() },
-                text = stringResource(id = R.string.finish_set_card),
+                text = R.string.finish_set_card,
                 Brush.linearGradient(
                     colors = GradientPurple,
                 )
@@ -64,13 +63,13 @@ class RegistrationActivity : ComponentActivity() {
         Column() {
             ButtonAddCard(
                 onClick = { addCardFront() },
-                text = stringResource(id = R.string.set_card_front),
+                text = R.string.set_card_front,
                 uri = frontImageUriState.value
             )
             Spacer(modifier = Modifier.height(20.dp))
             ButtonAddCard(
                 onClick = { addCardBack() },
-                text = stringResource(id = R.string.set_card_back),
+                text = R.string.set_card_back,
                 uri = backImageUriState.value
             )
         }
