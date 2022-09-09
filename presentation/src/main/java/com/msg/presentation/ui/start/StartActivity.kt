@@ -1,48 +1,42 @@
 package com.msg.presentation.ui.start
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.zIndex
-import com.msg.presentation.ui.theme.Background
-import com.msg.presentation.ui.theme.BtnGradient
-import com.msg.presentation.ui.theme.ButtonGradient
-import com.msg.presentation.ui.theme.ButtonNormal
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.msg.presentation.ui.login.LoginScreen
+import com.msg.presentation.ui.registration.RegistrationActivity
 
 class StartActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            Background()
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(Color.Transparent),
-                verticalArrangement = Arrangement.Bottom,
-            ) {
-                ButtonGradient(
-                    onClick = { },
-                    text = "회원가입",
-                    Brush.linearGradient(
-                        colors =  BtnGradient,
-                        )
+            StartNavigation()
+        }
+    }
+
+    @Composable
+    fun StartNavigation() {
+        val navController = rememberNavController()
+        NavHost(
+            modifier = Modifier.fillMaxSize(),
+            navController = navController,
+            startDestination = "start"
+        ) {
+            composable("start") {
+                StartScreen(toLogin = { navController.navigate("login") })
+            }
+            composable("login") {
+                LoginScreen(
+                    back = { navController.popBackStack() },
+                    toMain = { startActivity(Intent(this@StartActivity, RegistrationActivity::class.java)) }
                 )
-                Spacer(modifier = Modifier.height(16.dp))
-                ButtonNormal(
-                    onClick = { },
-                    text = "로그인",
-                    Color.Black,
-                    bolder = BorderStroke(1.dp, Color.White)
-                )
-                Spacer(modifier = Modifier.height(44.dp))
             }
         }
     }
