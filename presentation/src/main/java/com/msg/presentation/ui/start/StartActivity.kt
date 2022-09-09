@@ -12,6 +12,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.msg.presentation.ui.login.LoginScreen
 import com.msg.presentation.ui.registration.RegistrationActivity
+import com.msg.presentation.ui.signup.SignUpScreen
 
 class StartActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,13 +31,27 @@ class StartActivity : ComponentActivity() {
             startDestination = "start"
         ) {
             composable("start") {
-                StartScreen(toLogin = { navController.navigate("login") })
+                StartScreen(
+                    toLogin = { navController.navigate("login") },
+                    toSignUp = { navController.navigate("signup") }
+                )
             }
             composable("login") {
                 LoginScreen(
                     back = { navController.popBackStack() },
-                    toMain = { startActivity(Intent(this@StartActivity, RegistrationActivity::class.java)) }
+                    toMain = {
+                        startActivity(
+                            Intent(
+                                this@StartActivity,
+                                RegistrationActivity::class.java
+                            )
+                        )
+                    },
+                    toSignUp = { navController.navigate("signup") }
                 )
+            }
+            composable("signup") {
+                SignUpScreen()
             }
         }
     }
