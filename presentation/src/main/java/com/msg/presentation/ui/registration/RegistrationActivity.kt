@@ -20,6 +20,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.msg.presentation.MainActivity
+import com.msg.presentation.R
 import com.msg.presentation.ui.theme.*
 
 class RegistrationActivity : ComponentActivity() {
@@ -40,7 +41,7 @@ class RegistrationActivity : ComponentActivity() {
         setContent {
             Background()
             Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Bottom) {
-                TopBar()
+                TookAppBar(back = { backBtn() }, title = R.string.card)
                 Spacer(modifier = Modifier.height(32.dp))
                 AddCard()
                 Spacer(modifier = Modifier.height(140.dp))
@@ -79,24 +80,6 @@ class RegistrationActivity : ComponentActivity() {
                 text = stringResource(id = R.string.set_card_back),
                 uri = backImageUriState.value
             )
-        }
-    }
-
-    @Preview
-    @Composable
-    fun TopBar() {
-        Box(modifier = Modifier.fillMaxWidth()) {
-            IconButton(onClick = { backBtn() }) {
-                Icon(
-                    Icons.Default.ArrowBackIos,
-                    contentDescription = "",
-                    tint = Color.White,
-                    modifier = Modifier.padding(start = 16.dp)
-                )
-            }
-            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
-                DefaultText(text = stringResource(id = R.string.card), fontSize = 17)
-            }
         }
     }
 
