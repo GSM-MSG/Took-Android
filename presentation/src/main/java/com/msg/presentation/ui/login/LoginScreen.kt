@@ -14,7 +14,6 @@ import com.msg.presentation.ui.theme.*
 
 @Composable
 fun LoginScreen(back: () -> Unit, toMain: () -> Unit, toSignUp: () -> Unit) {
-
     Background()
     Column {
         TookAppBar(back = { back() }, title = R.string.login)
