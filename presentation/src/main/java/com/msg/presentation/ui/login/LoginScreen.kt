@@ -3,23 +3,37 @@ package com.msg.presentation.ui.login
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
-import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ErrorOutline
 import androidx.compose.material.icons.rounded.KeyboardArrowLeft
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import com.msg.presentation.R
 import com.msg.presentation.ui.theme.*
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
-fun LoginScreen(back: () -> Unit) {
+fun LoginScreen(back: () -> Unit, toRegistration: () -> Unit) {
     var email by remember { mutableStateOf<String?>(null) }
     var password by remember { mutableStateOf<String?>(null) }
+    var isError by remember { mutableStateOf<Boolean>(false) }
+    val keyboardController = LocalSoftwareKeyboardController.current
+    val focusRequester = remember { FocusRequester() }
+
+    fun isLogin() {
+        keyboardController?.hide()
+        isError = true
+    }
     Background()
     Column {
         Box(
@@ -38,22 +52,70 @@ fun LoginScreen(back: () -> Unit) {
                 tint = Color.White
             )
             Row(
-                modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(44.dp),
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(text = stringResource(id = R.string.login), color = Color.White)
+
+                DefaultText(
+                    text = stringResource(id = R.string.login),
+                    fontSize = 17
+                )
             }
         }
-        Spacer(modifier = Modifier.height(32.dp))
-        Text(text = stringResource(id = R.string.email), color = Color.White, modifier = Modifier.padding(start = 16.dp))
+        DefaultText(
+            text = stringResource(id = R.string.email),
+            fontSize = 14,
+            modifier = Modifier.padding(start = 16.dp, top = 32.dp)
+        )
         Spacer(modifier = Modifier.height(4.dp))
-        TextFieldNormal(text = email ?: "", textChange = { email = it }, stringResource(id = R.string.write_email))
-        Spacer(modifier = Modifier.height(24.dp))
-        Text(text = stringResource(id = R.string.password), color = Color.White, modifier = Modifier.padding(start = 16.dp))
+        TextFieldNormal(
+            text = email ?: "",
+            textChange = { email = it; isError = false },
+            placeholder = stringResource(id = R.string.write_email),
+            isError = isError,
+            onDone = { focusRequester.requestFocus() },
+            imeAction = ImeAction.Next
+        )
+        DefaultText(
+            text = stringResource(id = R.string.password),
+            fontSize = 14,
+            modifier = Modifier.padding(start = 16.dp, top = 24.dp)
+        )
         Spacer(modifier = Modifier.height(4.dp))
-        TextFieldNormal(text = password ?: "", textChange = { password = it }, stringResource(id = R.string.write_password))
+        TextFieldNormal(
+            text = password ?: "",
+            textChange = { password = it; isError = false },
+            placeholder = stringResource(id = R.string.write_password),
+            isError = isError,
+            onDone = { keyboardController?.hide() },
+            modifier = Modifier.focusRequester(focusRequester)
+        )
+        if (isError) {
+            Row(
+                modifier = Modifier
+                    .padding(start = 16.dp, top = 4.dp)
+                    .height(28.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Icon(
+                    imageVector = Icons.Default.ErrorOutline,
+                    contentDescription = null,
+                    tint = Color.Red
+                )
+                DefaultText(
+                    text = stringResource(id = R.string.wrong_login),
+                    fontSize = 12,
+                    textColor = Color.Red,
+                    modifier = Modifier.padding(start = 4.dp)
+                )
+            }
+        }
         Spacer(modifier = Modifier.weight(1f))
         ButtonDisable(
-            onClick = { },
+            onClick = { isLogin() },
             text = stringResource(id = R.string.login),
             gradient = Brush.linearGradient(BtnGradientPurple),
             enabledGradient = Brush.linearGradient(
@@ -61,17 +123,28 @@ fun LoginScreen(back: () -> Unit) {
             ),
             enabled = email.isNullOrBlank() || password.isNullOrBlank()
         )
-        Spacer(modifier = Modifier.height(13.dp))
         Row(
             horizontalArrangement = Arrangement.Center,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 13.dp, bottom = 17.dp)
         ) {
-            Text(text = stringResource(id = R.string.find_password), color = Color.White)
-            Spacer(modifier = Modifier.width(12.dp))
-            Text(text = "|", color = Color.White)
-            Spacer(modifier = Modifier.width(12.dp))
-            Text(text = stringResource(id = R.string.registration), color = Color.White)
+            DefaultText(
+                text = stringResource(id = R.string.find_password),
+                fontSize = 12,
+                textColor = Color.Gray
+            )
+            DefaultText(
+                text = "|",
+                fontSize = 12,
+                textColor = Color.Gray,
+                modifier = Modifier.padding(horizontal = 12.dp)
+            )
+            DefaultText(
+                text = stringResource(id = R.string.registration),
+                fontSize = 12,
+                textColor = Color.Gray
+            )
         }
-        Spacer(modifier = Modifier.height(17.dp))
     }
 }
