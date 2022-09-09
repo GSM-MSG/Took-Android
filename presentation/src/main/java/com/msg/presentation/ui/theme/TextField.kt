@@ -12,9 +12,7 @@ import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
@@ -41,7 +39,7 @@ fun TextFieldNormal(
     Column {
         if (label != null) {
             DefaultText(
-                text = stringResource(id = label),
+                text = label,
                 fontSize = 14,
                 modifier = Modifier.padding(start = 16.dp, top = labelTopMargin.dp),
                 textColor = White3
@@ -56,7 +54,7 @@ fun TextFieldNormal(
             textStyle = TextStyle(color = White2),
             placeholder = {
                 DefaultText(
-                    text = stringResource(id = placeholder),
+                    text = placeholder,
                     fontSize = 16,
                     textColor = Gray3
                 )

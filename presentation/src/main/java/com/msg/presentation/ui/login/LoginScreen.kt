@@ -6,7 +6,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.msg.presentation.R
@@ -78,7 +77,7 @@ fun loginBtn(
 ) {
     ButtonDisable(
         onClick = { isLogin() },
-        text = stringResource(id = R.string.login),
+        text = R.string.login,
         enabled = email.isNullOrBlank() || password.isNullOrBlank()
     )
     Row(
@@ -88,18 +87,18 @@ fun loginBtn(
             .padding(top = 13.dp, bottom = 17.dp)
     ) {
         DefaultText(
-            text = stringResource(id = R.string.find_password),
+            text = R.string.find_password,
             fontSize = 12,
             textColor = Gray1
         )
         DefaultText(
-            text = "|",
+            text = R.string.divide,
             fontSize = 12,
             textColor = Gray1,
             modifier = Modifier.padding(horizontal = 12.dp)
         )
         DefaultText(
-            text = stringResource(id = R.string.registration),
+            text = R.string.registration,
             fontSize = 12,
             textColor = Gray1,
             modifier = Modifier.clickable {
