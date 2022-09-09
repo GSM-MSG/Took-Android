@@ -9,6 +9,7 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.msg.presentation.R
 import com.msg.presentation.ui.theme.*
@@ -58,7 +59,8 @@ fun loginField(toMain: () -> Unit) {
             iconClick = { visiblePassword = !visiblePassword },
             visible = visiblePassword,
             visibleIcon = R.drawable.ic_visible,
-            unVisibleIcon = R.drawable.ic_unvisible
+            unVisibleIcon = R.drawable.ic_unvisible,
+            keyboardType = KeyboardType.Password
         )
         ErrorText(isError = isError, errorMsg = R.string.wrong_login)
         Spacer(modifier = Modifier.weight(1f))

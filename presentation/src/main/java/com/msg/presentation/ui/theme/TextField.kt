@@ -15,6 +15,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
@@ -34,7 +35,8 @@ fun TextFieldNormal(
     iconClick: () -> Unit,
     visible: Boolean = true,
     visibleIcon: Int = R.drawable.ic_cancel,
-    unVisibleIcon: Int = R.drawable.ic_cancel
+    unVisibleIcon: Int = R.drawable.ic_cancel,
+    keyboardType: KeyboardType = KeyboardType.Text
 ) {
     Column {
         if (label != null) {
@@ -49,6 +51,7 @@ fun TextFieldNormal(
         OutlinedTextField(
             value = text ?: "",
             visualTransformation = if(visible) VisualTransformation.None else PasswordVisualTransformation(),
+            keyboardOptions = KeyboardOptions(keyboardType = keyboardType),
             onValueChange = textChange,
             textStyle = TextStyle(color = White2),
             placeholder = {
