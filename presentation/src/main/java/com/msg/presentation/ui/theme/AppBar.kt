@@ -8,7 +8,6 @@ import androidx.compose.material.icons.rounded.ArrowBackIos
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 
@@ -30,7 +29,7 @@ fun TookAppBar(
                 .clickable {
                     back()
                 },
-            tint = Color.White
+            tint = White1
         )
         Row(
             modifier = Modifier
@@ -38,7 +37,6 @@ fun TookAppBar(
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
         ) {
-
             DefaultText(
                 text = stringResource(id = title),
                 fontSize = 17

@@ -6,8 +6,6 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
-import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
@@ -30,9 +28,9 @@ fun LoginScreen(back: () -> Unit, toMain: () -> Unit) {
 fun loginField(toMain: () -> Unit) {
     var email by remember { mutableStateOf<String?>(null) }
     var password by remember { mutableStateOf<String?>(null) }
+    var visiblePassword by remember { mutableStateOf<Boolean>(false) }
     var isError by remember { mutableStateOf<Boolean>(false) }
     val keyboardController = LocalSoftwareKeyboardController.current
-    val focusRequester = remember { FocusRequester() }
 
     fun isLogin() {
         keyboardController?.hide()
@@ -47,8 +45,7 @@ fun loginField(toMain: () -> Unit) {
             textChange = { email = it; isError = false },
             placeholder = R.string.write_email,
             isError = isError,
-            onDone = { focusRequester.requestFocus() },
-            imeAction = ImeAction.Next
+            iconClick = { email = null }
         )
         TextFieldNormal(
             label = R.string.password,
@@ -58,7 +55,10 @@ fun loginField(toMain: () -> Unit) {
             placeholder = R.string.write_password,
             isError = isError,
             onDone = { keyboardController?.hide() },
-            modifier = Modifier.focusRequester(focusRequester)
+            iconClick = { visiblePassword = !visiblePassword },
+            visible = visiblePassword,
+            visibleIcon = R.drawable.ic_visible,
+            unVisibleIcon = R.drawable.ic_unvisible
         )
         ErrorText(isError = isError, errorMsg = R.string.wrong_login)
         Spacer(modifier = Modifier.weight(1f))
@@ -75,10 +75,6 @@ fun loginBtn(
     ButtonDisable(
         onClick = { isLogin() },
         text = stringResource(id = R.string.login),
-        gradient = Brush.linearGradient(BtnGradientPurple),
-        enabledGradient = Brush.linearGradient(
-            BtnGradientGray
-        ),
         enabled = email.isNullOrBlank() || password.isNullOrBlank()
     )
     Row(
@@ -90,18 +86,18 @@ fun loginBtn(
         DefaultText(
             text = stringResource(id = R.string.find_password),
             fontSize = 12,
-            textColor = Color.Gray
+            textColor = Gray1
         )
         DefaultText(
             text = "|",
             fontSize = 12,
-            textColor = Color.Gray,
+            textColor = Gray1,
             modifier = Modifier.padding(horizontal = 12.dp)
         )
         DefaultText(
             text = stringResource(id = R.string.registration),
             fontSize = 12,
-            textColor = Color.Gray
+            textColor = Gray1
         )
     }
 }

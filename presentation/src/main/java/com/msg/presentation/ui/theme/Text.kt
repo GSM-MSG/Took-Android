@@ -29,13 +29,13 @@ fun ButtonText(text: String) {
             fontFamily = font,
             fontWeight = FontWeight.Bold,
             fontSize = 14.sp,
-            color = Color.White
+            color = White1
         )
     )
 }
 
 @Composable
-fun DefaultText(text: String, fontSize: Int, textColor: Color = Color.White, modifier: Modifier = Modifier) {
+fun DefaultText(text: String, fontSize: Int, textColor: Color = White1, modifier: Modifier = Modifier) {
     val font = FontFamily(Font(R.font.sfpro, FontWeight.Bold))
     Text(
         text = text,
@@ -61,12 +61,12 @@ fun ErrorText(isError: Boolean, errorMsg: Int) {
             Icon(
                 imageVector = Icons.Default.ErrorOutline,
                 contentDescription = null,
-                tint = Color.Red
+                tint = Red
             )
             DefaultText(
                 text = stringResource(id = errorMsg),
                 fontSize = 12,
-                textColor = Color.Red,
+                textColor = Red,
                 modifier = Modifier.padding(start = 4.dp)
             )
         }
