@@ -1,6 +1,6 @@
 package com.msg.app.di
 
-import com.msg.data.remote.datasource.datasourceImpl.ImageDataSourceImpl
+import com.msg.data.remote.datasource.datasource.ImageDataSource
 import com.msg.data.repository.ImageRepositoryImpl
 import com.msg.domain.repository.ImageRepository
 import dagger.Module
@@ -15,6 +15,6 @@ object RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideImageRepository(dataSource: ImageDataSourceImpl): ImageRepository =
+    fun provideImageRepository(dataSource: ImageDataSource): ImageRepository =
         ImageRepositoryImpl(dataSource)
 }
