@@ -1,8 +1,10 @@
 package com.msg.presentation.ui.theme
 
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
@@ -16,6 +18,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.msg.presentation.R
@@ -35,7 +38,13 @@ fun ButtonText(text: Int) {
 }
 
 @Composable
-fun DefaultText(text: Int, fontSize: Int, textColor: Color = White1, modifier: Modifier = Modifier) {
+fun DefaultText(
+    text: Int,
+    fontSize: Int,
+    textColor: Color = White1,
+    modifier: Modifier = Modifier,
+    textAlign: TextAlign = TextAlign.Left
+) {
     val font = FontFamily(Font(R.font.sfpro, FontWeight.Bold))
     Text(
         text = stringResource(id = text),
@@ -45,8 +54,56 @@ fun DefaultText(text: Int, fontSize: Int, textColor: Color = White1, modifier: M
             fontSize = fontSize.sp,
             color = textColor
         ),
-        modifier = modifier
+        modifier = modifier,
+        textAlign = textAlign
     )
+}
+
+@Composable
+fun BoxText(
+    text: Int,
+    modifier: Modifier,
+    fontSize: Int,
+    onClick: (Int) -> Unit
+) {
+    Box(
+        modifier = modifier
+            .fillMaxHeight()
+            .clickable { onClick(text) },
+        contentAlignment = Alignment.Center
+    ) {
+        DefaultText(
+            text = text,
+            fontSize = fontSize,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.fillMaxWidth()
+        )
+    }
+}
+
+@Composable
+fun BoxNumerText(
+    text: Int?,
+    modifier: Modifier,
+    fontSize: Int,
+    current: Int,
+    position: Int
+) {
+    Box(
+        modifier = modifier
+            .fillMaxHeight()
+            .background(Black4, RoundedCornerShape(16.dp))
+            .border(1.dp, if (current == position) Purple2 else Black1, RoundedCornerShape(16.dp)),
+        contentAlignment = Alignment.Center
+    ) {
+        if (text != null)
+            DefaultText(
+                text = text,
+                fontSize = fontSize,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth()
+            )
+    }
 }
 
 @Composable
