@@ -59,7 +59,9 @@ class StartActivity : ComponentActivity() {
                 )
             }
             composable("confirm") {
-                ConfirmScreen()
+                ConfirmScreen(
+                    back = { navController.popBackStack() }
+                )
             }
         }
     }
