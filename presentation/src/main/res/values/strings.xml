@@ -1,4 +1,36 @@
 <resources>
     <string name="app_name">Took</string>
     <string name="title_activity_registration">RegistrationActivity</string>
+<!-- title text   -->
+    <string name="email">이메일</string>
+    <string name="password">비밀번호</string>
+    <string name="login">로그인</string>
+    <string name="registration">회원가입</string>
+    <string name="confirm">인증번호</string>
+    <string name="re_password">비밀번호 재설정</string>
+    <string name="agreed">약관동의</string>
+    <string name="card">명함 등록</string>
+
+
+    <string name="write_email">이메일을 입력해주세요.</string>
+    <string name="write_password">비밀번호를 입력해주세요.</string>
+    <string name="is_account">이미계정이 있으신가요?</string>
+    <string name="find_password">비밀번호 찾기</string>
+    <string name="send_confirm">입력하신 이메일로\n인증번호가 발송되었습니다.</string>
+    <string name="write_new_password">새로운 비밀번호를 입력해주세요.</string>
+    <string name="write_confirm_password">새로운 비밀번호를 다시 입력해주세요.</string>
+    <string name="new_password">새로운 비밀번호</string>
+    <string name="new_re_password">비밀번호 재입력</string>
+    <string name="all_agreed">약관 전체동의</string>
+
+<!-- error text   -->
+    <string name="wrong_login">이메일또는 비밀번호가 잘못되었습니다.</string>
+    <string name="wrong_re_password">등록되지 않은 닉네임입니다.</string>
+    
+    
+    <string name="my_card">내 명함</string>
+    <string name="set_card">명함 등록하기</string>
+    <string name="set_card_front">앞면 등록하기</string>
+    <string name="set_card_back">뒷면 등록하기</string>
+    <string name="finish_set_card">등록완료!</string>
 </resources>

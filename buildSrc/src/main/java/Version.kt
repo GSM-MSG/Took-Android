@@ -25,6 +25,7 @@ object Versions {
     const val LEGACY = "1.0.0"
     const val RECYCLERVIEW = "1.1.0"
     const val COMPOSE = "1.0.1"
+    const val COMPOSE_NAV = "2.5.1"
 
     const val HILT = "2.38.1"
     const val MATERIAL = "1.3.0"
@@ -54,7 +55,7 @@ object Versions {
 
 
     const val COIL_VERSION = "2.1.0"
-    const val GLIDE_VERSION = "4.13.2"
+    const val GLIDE_VERSION = "1.4.7"
     const val SHIMMER = "0.5.0"
     const val LOTTIE_VERSION = "5.2.0"
 }

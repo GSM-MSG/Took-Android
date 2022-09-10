@@ -1,14 +1,14 @@
 package com.msg.presentation.ui.theme
 
 import android.net.Uri
-import androidx.compose.foundation.*
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Icon
-import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.runtime.Composable
@@ -24,7 +24,7 @@ import com.skydoves.landscapist.glide.GlideImage
 fun ButtonNormal(
     onClick: () -> Unit,
     text: String,
-    buttonColor: Color,
+    buttonColor: Color = Transparent,
     bolder: BorderStroke? = null
 ) {
     Button(
@@ -35,7 +35,7 @@ fun ButtonNormal(
             .height(56.dp),
         colors = ButtonDefaults.buttonColors(
             backgroundColor = buttonColor,
-            contentColor = Color.White
+            contentColor = White1
         ),
         shape = RoundedCornerShape(16.dp),
         border = bolder
@@ -48,13 +48,13 @@ fun ButtonNormal(
 fun ButtonGradient(
     onClick: () -> Unit,
     text: String,
-    gradient: Brush,
+    gradient: Brush = Brush.linearGradient(GradientGray),
 ) {
     Button(
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(
-            backgroundColor = Color.Transparent,
-            contentColor = Color.White
+            backgroundColor = Transparent,
+            contentColor = White1
         )
     ) {
         Box(
@@ -67,6 +67,17 @@ fun ButtonGradient(
             ButtonText(text = text)
         }
     }
+}
+
+@Composable
+fun ButtonDisable(
+    onClick: () -> Unit,
+    text: String,
+    gradient: Brush = Brush.linearGradient(GradientPurple),
+    enabled: Boolean
+) {
+    if(enabled) ButtonGradient(onClick = {  }, text = text)
+    else ButtonGradient(onClick = { onClick() }, text = text, gradient = gradient)
 }
 
 @Composable
@@ -83,11 +94,11 @@ fun ButtonAddCard(
                 .padding(horizontal = 16.dp)
                 .height(207.dp),
             colors = ButtonDefaults.buttonColors(
-                backgroundColor = Color.Gray.copy(alpha = 0f),
-                contentColor = Color.White
+                backgroundColor = Black3,
+                contentColor = White1
             ),
             shape = RoundedCornerShape(10.dp),
-            border = BorderStroke(0.7.dp, Color.White)
+            border = BorderStroke(0.5.dp, Gray5)
         ) {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 Icon(Icons.Default.AddCircle, contentDescription = "")
