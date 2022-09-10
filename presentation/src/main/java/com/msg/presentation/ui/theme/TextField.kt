@@ -79,7 +79,7 @@ fun TextFieldNormal(
                 Icon(
                     painter = painterResource(id = if(visible) unVisibleIcon else visibleIcon),
                     contentDescription = null,
-                    tint = if(text.isNullOrEmpty()) Transparent else Gray1,
+                    tint = if(text.isNullOrEmpty()) Transparent else Unspecified,
                     modifier = Modifier.clickable {
                         iconClick()
                     }
