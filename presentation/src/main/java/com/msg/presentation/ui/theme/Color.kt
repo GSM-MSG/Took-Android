@@ -33,3 +33,4 @@ val Black1 = Color(0xFF1D191E)
 val Black2 = Color(0xFF000000)
 val Black3 = Color(0x661A1A20)
 val Transparent = Color.Transparent
+val Unspecified = Color.Unspecified
