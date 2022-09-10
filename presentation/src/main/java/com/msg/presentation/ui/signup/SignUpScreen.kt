@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun SignUpScreen(back: () -> Unit, toLogin: () -> Unit) {
+fun SignUpScreen(back: () -> Unit, toLogin: () -> Unit, toConfirm: () -> Unit) {
     val sheetState = rememberModalBottomSheetState(
         initialValue = ModalBottomSheetValue.Hidden,
         skipHalfExpanded = true
@@ -31,18 +31,26 @@ fun SignUpScreen(back: () -> Unit, toLogin: () -> Unit) {
         sheetBackgroundColor = White1,
         sheetShape = RoundedCornerShape(topStart = 32.dp, topEnd = 32.dp),
         sheetContent = {
-            bottomTerms()
+            bottomTerms(toConfirm = { toConfirm() })
         }) {
         Column {
             TookAppBar(back = { back() }, title = R.string.registration)
-            signUpField(toLogin = { toLogin() }, scope = scope, state = sheetState)
+            signUpField(
+                toLogin = { toLogin() },
+                scope = scope,
+                state = sheetState
+            )
         }
     }
 }
 
 @OptIn(ExperimentalComposeUiApi::class, ExperimentalMaterialApi::class)
 @Composable
-fun signUpField(toLogin: () -> Unit, scope: CoroutineScope, state: ModalBottomSheetState) {
+fun signUpField(
+    toLogin: () -> Unit,
+    scope: CoroutineScope,
+    state: ModalBottomSheetState
+) {
     var email by remember { mutableStateOf<String?>(null) }
     var password by remember { mutableStateOf<String?>(null) }
     var visiblePassword by remember { mutableStateOf<Boolean>(false) }
@@ -128,12 +136,13 @@ fun signUpBtn(
 }
 
 @Composable
-fun bottomTerms() {
+fun bottomTerms(toConfirm: () -> Unit) {
     var check1 by remember { mutableStateOf(false) }
     var check2 by remember { mutableStateOf(false) }
     var check3 by remember { mutableStateOf(false) }
     var check4 by remember { mutableStateOf(false) }
     var check5 by remember { mutableStateOf(false) }
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -158,7 +167,7 @@ fun bottomTerms() {
         agreed(enabled = check5, checkChange = { check5 = it }, detailAgreed = {})
         Spacer(modifier = Modifier.weight(1f))
         ButtonDisable(
-            onClick = {},
+            onClick = { toConfirm() },
             text = R.string.okay,
             enabled = (check1 && check2 && check3 && check4 && check5)
         )
