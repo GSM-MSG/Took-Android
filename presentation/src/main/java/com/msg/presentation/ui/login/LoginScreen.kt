@@ -78,7 +78,7 @@ fun loginBtn(
     ButtonDisable(
         onClick = { isLogin() },
         text = R.string.login,
-        enabled = email.isNullOrBlank() || password.isNullOrBlank()
+        enabled = !email.isNullOrBlank() && !password.isNullOrBlank()
     )
     Row(
         horizontalArrangement = Arrangement.Center,
