@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.msg.presentation.ui.confirm.ConfirmScreen
 import com.msg.presentation.ui.login.LoginScreen
 import com.msg.presentation.ui.registration.RegistrationActivity
 import com.msg.presentation.ui.signup.SignUpScreen
@@ -53,8 +54,12 @@ class StartActivity : ComponentActivity() {
             composable("signup") {
                 SignUpScreen(
                     back = { navController.popBackStack() },
-                    toLogin = { navController.navigate("login") }
+                    toLogin = { navController.navigate("login") },
+                    toConfirm = { navController.navigate("confirm") }
                 )
+            }
+            composable("confirm") {
+                ConfirmScreen()
             }
         }
     }
