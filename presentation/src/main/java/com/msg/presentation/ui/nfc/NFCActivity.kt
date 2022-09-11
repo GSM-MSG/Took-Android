@@ -6,6 +6,7 @@ import android.nfc.FormatException
 import android.nfc.NfcAdapter
 import android.os.Bundle
 import android.util.Log
+import android.view.Surface
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -23,8 +24,10 @@ import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.msg.presentation.R
 import com.msg.presentation.ui.theme.Background
+import dagger.hilt.android.AndroidEntryPoint
 import java.io.IOException
 
+@AndroidEntryPoint
 class NFCActivity : ComponentActivity() {
 
     private val tag = "NFCActivity:TAG"

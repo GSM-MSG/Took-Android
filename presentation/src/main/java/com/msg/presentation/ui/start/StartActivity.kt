@@ -1,47 +1,98 @@
 package com.msg.presentation.ui.start
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.Surface
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
-import com.msg.presentation.ui.theme.Background
-import com.msg.presentation.ui.theme.BtnGradient
-import com.msg.presentation.ui.theme.ButtonGradient
-import com.msg.presentation.ui.theme.ButtonNormal
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.msg.presentation.ui.change_password.ChangePasswordScreen
+import com.msg.presentation.ui.change_password.ConfirmEmailScreen
+import com.msg.presentation.ui.confirm.ConfirmScreen
+import com.msg.presentation.ui.login.LoginScreen
+import com.msg.presentation.ui.registration.RegistrationActivity
+import com.msg.presentation.ui.signup.SignUpScreen
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class StartActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            Background()
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(Color.Transparent),
-                verticalArrangement = Arrangement.Bottom,
-            ) {
-                ButtonGradient(
-                    onClick = { },
-                    text = "회원가입",
-                    Brush.linearGradient(
-                        colors =  BtnGradient,
+            StartNavigation()
+        }
+    }
+
+    @Composable
+    fun StartNavigation() {
+        val navController = rememberNavController()
+        NavHost(
+            modifier = Modifier.fillMaxSize(),
+            navController = navController,
+            startDestination = "start"
+        ) {
+            composable("start") {
+                StartScreen(
+                    toLogin = { navController.navigate("login") },
+                    toSignUp = { navController.navigate("signup") }
+                )
+            }
+            composable("login") {
+                LoginScreen(
+                    back = { navController.popBackStack() },
+                    toMain = {
+                        startActivity(
+                            Intent(
+                                this@StartActivity,
+                                RegistrationActivity::class.java
+                            )
                         )
+                    },
+                    toSignUp = { navController.navigate("signup") },
+                    toPassword = { navController.navigate("confirm_email") }
                 )
-                Spacer(modifier = Modifier.height(16.dp))
-                ButtonNormal(
-                    onClick = { },
-                    text = "로그인",
-                    Color.Black,
-                    bolder = BorderStroke(1.dp, Color.White)
+            }
+            composable("signup") {
+                SignUpScreen(
+                    back = { navController.popBackStack() },
+                    toLogin = { navController.navigate("login") },
+                    toConfirm = { navController.navigate("confirm") }
                 )
-                Spacer(modifier = Modifier.height(44.dp))
+            }
+            composable("confirm") {
+                ConfirmScreen(
+                    back = { navController.popBackStack() },
+                    toNext = {
+                        startActivity(
+                            Intent(
+                                this@StartActivity,
+                                RegistrationActivity::class.java
+                            )
+                        )
+                    }
+                )
+            }
+            composable("confirm_email") {
+                ConfirmEmailScreen(
+                    back = { navController.popBackStack() },
+                    toNext = { navController.navigate("confirm_password") }
+                )
+            }
+            composable("confirm_password") {
+                ConfirmScreen(
+                    back = { navController.popBackStack() },
+                    toNext = { navController.navigate("change_password") }
+                )
+            }
+            composable("change_password") {
+                ChangePasswordScreen(
+                    back = { navController.popBackStack() },
+                    toLogin = { navController.navigate("login") }
+                )
             }
         }
     }

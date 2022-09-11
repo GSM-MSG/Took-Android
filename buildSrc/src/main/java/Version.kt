@@ -12,7 +12,7 @@ object Versions {
     const val COMPILE_SDK_VERSION = 31
     const val BUILD_TOOLS_VERSION = "32.0.0"
     const val MIN_SDK_VERSION = 29
-    const val TARGET_SDK_VERSION = 30
+    const val TARGET_SDK_VERSION = 31
 
     const val CONSTRAINT_LAYOUT = "2.1.2"
     const val CORE_KTX = "1.5.0"
@@ -24,7 +24,8 @@ object Versions {
     const val ROOM = "2.3.0"
     const val LEGACY = "1.0.0"
     const val RECYCLERVIEW = "1.1.0"
-    const val COMPOSE = "1.0.1"
+    const val COMPOSE = "1.2.0-alpha03"
+    const val COMPOSE_NAV = "2.5.1"
 
     const val HILT = "2.38.1"
     const val MATERIAL = "1.3.0"
@@ -42,7 +43,7 @@ object Versions {
 
     const val JUNIT = "4.13.2"
     const val MOCKITO = "4.2.0"
-    const val ANDROID_JUNIT = "1.1.2"
+    const val ANDROID_JUNIT = "1.1.3"
     const val ESPRESSO_CORE = "3.3.0"
 
     const val NAV = "2.3.5"
@@ -54,6 +55,7 @@ object Versions {
 
 
     const val COIL_VERSION = "2.1.0"
+    const val GLIDE_VERSION = "1.4.7"
     const val SHIMMER = "0.5.0"
     const val LOTTIE_VERSION = "4.0.0"
 }

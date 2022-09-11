@@ -46,6 +46,8 @@ object Dependency {
         const val COMPOSE_MATERAIL = "androidx.compose.material:material:${Versions.COMPOSE}"
         const val COMPOSE_PREVIEW = "androidx.compose.ui:ui-tooling-preview:${Versions.COMPOSE}"
         const val COMPOSE_TOOLING = "androidx.compose.ui:ui-tooling:${Versions.COMPOSE}"
+        const val COMPOSE_NAV = "androidx.navigation:navigation-compose:${Versions.COMPOSE_NAV}"
+        const val COMPOSE_ICONS = "androidx.compose.material:material-icons-extended:${Versions.COMPOSE}"
     }
 
     object ComposeTest {
@@ -108,6 +110,7 @@ object Dependency {
 
     object ImageLoad {
         const val COIL = "io.coil-kt:coil:${Versions.COIL_VERSION}"
+        const val GLIDE = "com.github.skydoves:landscapist-glide:${Versions.GLIDE_VERSION}"
     }
 
     object Lottie {
