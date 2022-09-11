@@ -4,12 +4,15 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
+import com.google.accompanist.navigation.animation.AnimatedNavHost
+import com.google.accompanist.navigation.animation.composable
+import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.msg.presentation.ui.change_password.ChangePasswordScreen
 import com.msg.presentation.ui.change_password.ConfirmEmailScreen
 import com.msg.presentation.ui.confirm.ConfirmScreen
@@ -25,21 +28,28 @@ class StartActivity : ComponentActivity() {
         }
     }
 
+    @OptIn(ExperimentalAnimationApi::class)
     @Composable
     fun StartNavigation() {
-        val navController = rememberNavController()
-        NavHost(
+        val navController = rememberAnimatedNavController()
+        AnimatedNavHost(
             modifier = Modifier.fillMaxSize(),
             navController = navController,
             startDestination = "start"
         ) {
-            composable("start") {
+            composable(
+                route = "start",
+                enterTransition = { EnterTransition.None },
+                exitTransition = { ExitTransition.None }) {
                 StartScreen(
-                    toLogin = { navController.navigate("login") },
-                    toSignUp = { navController.navigate("signup") }
+                    toLogin = { navController.navigate(route = "login") },
+                    toSignUp = { navController.navigate(route = "signup") }
                 )
             }
-            composable("login") {
+            composable(
+                route = "login",
+                enterTransition = { EnterTransition.None },
+                exitTransition = { ExitTransition.None }) {
                 LoginScreen(
                     back = { navController.popBackStack() },
                     toMain = {
@@ -50,18 +60,24 @@ class StartActivity : ComponentActivity() {
                             )
                         )
                     },
-                    toSignUp = { navController.navigate("signup") },
-                    toPassword = { navController.navigate("confirm_email") }
+                    toSignUp = { navController.navigate(route = "signup") },
+                    toPassword = { navController.navigate(route = "confirm_email") }
                 )
             }
-            composable("signup") {
+            composable(
+                route = "signup",
+                enterTransition = { EnterTransition.None },
+                exitTransition = { ExitTransition.None }) {
                 SignUpScreen(
                     back = { navController.popBackStack() },
-                    toLogin = { navController.navigate("login") },
-                    toConfirm = { navController.navigate("confirm") }
+                    toLogin = { navController.navigate(route = "login") },
+                    toConfirm = { navController.navigate(route = "confirm") }
                 )
             }
-            composable("confirm") {
+            composable(
+                route = "confirm",
+                enterTransition = { EnterTransition.None },
+                exitTransition = { ExitTransition.None }) {
                 ConfirmScreen(
                     back = { navController.popBackStack() },
                     toNext = {
@@ -74,22 +90,31 @@ class StartActivity : ComponentActivity() {
                     }
                 )
             }
-            composable("confirm_email") {
+            composable(
+                route = "confirm_email",
+                enterTransition = { EnterTransition.None },
+                exitTransition = { ExitTransition.None }) {
                 ConfirmEmailScreen(
                     back = { navController.popBackStack() },
-                    toNext = { navController.navigate("confirm_password") }
+                    toNext = { navController.navigate(route = "confirm_password") }
                 )
             }
-            composable("confirm_password") {
+            composable(
+                route = "confirm_password",
+                enterTransition = { EnterTransition.None },
+                exitTransition = { ExitTransition.None }) {
                 ConfirmScreen(
                     back = { navController.popBackStack() },
-                    toNext = { navController.navigate("change_password") }
+                    toNext = { navController.navigate(route = "change_password") }
                 )
             }
-            composable("change_password") {
+            composable(
+                route = "change_password",
+                enterTransition = { EnterTransition.None },
+                exitTransition = { ExitTransition.None }) {
                 ChangePasswordScreen(
                     back = { navController.popBackStack() },
-                    toLogin = { navController.navigate("login") }
+                    toLogin = { navController.navigate(route = "login") }
                 )
             }
         }
