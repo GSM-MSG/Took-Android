@@ -4,29 +4,46 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
+import androidx.compose.runtime.internal.isLiveLiteralsEnabled
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.airbnb.lottie.compose.LottieAnimation
-import com.airbnb.lottie.compose.LottieCompositionSpec
-import com.airbnb.lottie.compose.rememberLottieComposition
+import com.airbnb.lottie.compose.*
 import com.msg.presentation.R
 import com.msg.presentation.ui.theme.Background
 
 @Composable
 fun NFCScreen(onClick: () -> Unit) {
+
+    var isLottieAnimationPlaying by remember{ mutableStateOf(true) }
+
+    val compositionResult: LottieCompositionResult =
+        rememberLottieComposition(spec = LottieCompositionSpec.RawRes(R.raw.nfc_effect))
+    val progress by animateLottieCompositionAsState(
+        compositionResult.value,
+        isPlaying = isLottieAnimationPlaying,
+        iterations = LottieConstants.IterateForever,
+        speed = 1.0f
+    )
+
     Surface(modifier = Modifier.fillMaxSize()) {
         Background()
-        NfcLottie()
+        LottieAnimation(
+            composition = compositionResult.value,
+            progress
+        )
         Column(
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Button(
-                onClick = { onClick() }, modifier = Modifier
+                onClick = {
+                    onClick()
+                    isLottieAnimationPlaying = !isLottieAnimationPlaying
+                          },
+                modifier = Modifier
                     .width(300.dp)
                     .height(50.dp)
             ) {
@@ -34,13 +51,4 @@ fun NFCScreen(onClick: () -> Unit) {
             }
         }
     }
-}
-
-@Composable
-fun NfcLottie() {
-    val composition by rememberLottieComposition(spec = LottieCompositionSpec.RawRes(R.raw.nfc_effect))
-    LottieAnimation(
-        composition = composition,
-        iterations = Int.MAX_VALUE
-    )
 }
