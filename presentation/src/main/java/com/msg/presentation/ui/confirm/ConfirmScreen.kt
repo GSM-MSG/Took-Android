@@ -15,7 +15,7 @@ import com.msg.presentation.R
 import com.msg.presentation.ui.theme.*
 
 @Composable
-fun ConfirmScreen(back: () -> Unit) {
+fun ConfirmScreen(back: () -> Unit, toNext: () -> Unit) {
     var confirmArray by remember { mutableStateOf<Array<Int?>>(arrayOf(null, null, null, null)) }
     var currentConfirm by remember { mutableStateOf(0) }
     var isError by remember { mutableStateOf(false) }
@@ -38,7 +38,7 @@ fun ConfirmScreen(back: () -> Unit) {
         confirmArray = arrayOf(null, null, null, null)
         currentConfirm = 0
         if (password.equals("1234")) {
-
+            toNext()
         } else {
             isError = true
         }
