@@ -27,7 +27,6 @@ import com.msg.presentation.ui.theme.Background
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.IOException
 
-@AndroidEntryPoint
 class NFCActivity : ComponentActivity() {
 
     private val tag = "NFCActivity:TAG"
@@ -47,23 +46,7 @@ class NFCActivity : ComponentActivity() {
             Log.d(tag, "$nfcAdapter")
         }
         setContent {
-            Surface(modifier = Modifier.fillMaxSize()) {
-                Background()
-                NfcLottie()
-                Column(
-                    modifier = Modifier.fillMaxSize(),
-                    verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    Button(
-                        onClick = { writeNFC(context = this@NFCActivity) }, modifier = Modifier
-                            .width(300.dp)
-                            .height(50.dp)
-                    ) {
-                        Text(text = "NFC")
-                    }
-                }
-            }
+            NFCScreen(onClick = { writeNFC(this) })
         }
     }
 
@@ -82,15 +65,6 @@ class NFCActivity : ComponentActivity() {
             Toast.makeText(context, writeError, Toast.LENGTH_SHORT).show()
             e.printStackTrace()
         }
-    }
-
-    @Composable
-    fun NfcLottie() {
-        val composition by rememberLottieComposition(spec = LottieCompositionSpec.RawRes(R.raw.nfc_effect))
-        LottieAnimation(
-            composition = composition,
-            iterations = Int.MAX_VALUE
-        )
     }
 
 }
