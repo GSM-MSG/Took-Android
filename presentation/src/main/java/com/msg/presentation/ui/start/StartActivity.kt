@@ -60,7 +60,9 @@ class StartActivity : ComponentActivity() {
                             )
                         )
                     },
-                    toSignUp = { navController.navigate(route = "signup") },
+                    toSignUp = { navController.navigate(route = "signup") {
+                        popUpTo("start")
+                    } },
                     toPassword = { navController.navigate(route = "confirm_email") }
                 )
             }
@@ -70,7 +72,9 @@ class StartActivity : ComponentActivity() {
                 exitTransition = { ExitTransition.None }) {
                 SignUpScreen(
                     back = { navController.popBackStack() },
-                    toLogin = { navController.navigate(route = "login") },
+                    toLogin = { navController.navigate(route = "login") {
+                        popUpTo("start")
+                    } },
                     toConfirm = { navController.navigate(route = "confirm") }
                 )
             }
@@ -96,7 +100,11 @@ class StartActivity : ComponentActivity() {
                 exitTransition = { ExitTransition.None }) {
                 ConfirmEmailScreen(
                     back = { navController.popBackStack() },
-                    toNext = { navController.navigate(route = "confirm_password") }
+                    toNext = {
+                        navController.navigate(route = "confirm_password") {
+                            popUpTo(route = "login")
+                        }
+                    }
                 )
             }
             composable(
@@ -105,7 +113,11 @@ class StartActivity : ComponentActivity() {
                 exitTransition = { ExitTransition.None }) {
                 ConfirmScreen(
                     back = { navController.popBackStack() },
-                    toNext = { navController.navigate(route = "change_password") }
+                    toNext = {
+                        navController.navigate(route = "change_password") {
+                            popUpTo(route = "login")
+                        }
+                    }
                 )
             }
             composable(
@@ -114,7 +126,11 @@ class StartActivity : ComponentActivity() {
                 exitTransition = { ExitTransition.None }) {
                 ChangePasswordScreen(
                     back = { navController.popBackStack() },
-                    toLogin = { navController.navigate(route = "login") }
+                    toLogin = {
+                        navController.navigate(route = "login") {
+                            popUpTo(route = "start")
+                        }
+                    }
                 )
             }
         }
