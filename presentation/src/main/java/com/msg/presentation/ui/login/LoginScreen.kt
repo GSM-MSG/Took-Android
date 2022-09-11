@@ -12,17 +12,22 @@ import com.msg.presentation.R
 import com.msg.presentation.ui.theme.*
 
 @Composable
-fun LoginScreen(back: () -> Unit, toMain: () -> Unit, toSignUp: () -> Unit) {
+fun LoginScreen(
+    back: () -> Unit,
+    toMain: () -> Unit,
+    toSignUp: () -> Unit,
+    toPassword: () -> Unit
+) {
     Background()
     Column {
         TookAppBar(back = { back() }, title = R.string.login)
-        loginField(toMain = { toMain() }, toSignUp = { toSignUp() })
+        loginField(toMain = { toMain() }, toSignUp = { toSignUp() }, toPassword = { toPassword() })
     }
 }
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
-fun loginField(toMain: () -> Unit, toSignUp: () -> Unit) {
+fun loginField(toMain: () -> Unit, toSignUp: () -> Unit, toPassword: () -> Unit) {
     var email by remember { mutableStateOf<String?>(null) }
     var password by remember { mutableStateOf<String?>(null) }
     var visiblePassword by remember { mutableStateOf<Boolean>(false) }
@@ -64,7 +69,9 @@ fun loginField(toMain: () -> Unit, toSignUp: () -> Unit) {
             isLogin = { isLogin() },
             email = email,
             password = password,
-            toSignUp = { toSignUp() })
+            toSignUp = { toSignUp() },
+            toPassword = { toPassword() }
+        )
     }
 }
 
@@ -73,7 +80,8 @@ fun loginBtn(
     isLogin: () -> Unit,
     email: String?,
     password: String?,
-    toSignUp: () -> Unit
+    toSignUp: () -> Unit,
+    toPassword: () -> Unit
 ) {
     ButtonDisable(
         onClick = { isLogin() },
@@ -89,7 +97,10 @@ fun loginBtn(
         DefaultText(
             text = R.string.find_password,
             fontSize = 12,
-            textColor = Gray1
+            textColor = Gray1,
+            modifier = Modifier.clickable {
+                toPassword()
+            }
         )
         DefaultText(
             text = R.string.divide,

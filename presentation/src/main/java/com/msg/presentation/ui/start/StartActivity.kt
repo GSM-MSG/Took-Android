@@ -10,6 +10,8 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.msg.presentation.ui.change_password.ChangePasswordScreen
+import com.msg.presentation.ui.change_password.ConfirmEmailScreen
 import com.msg.presentation.ui.confirm.ConfirmScreen
 import com.msg.presentation.ui.login.LoginScreen
 import com.msg.presentation.ui.registration.RegistrationActivity
@@ -48,7 +50,8 @@ class StartActivity : ComponentActivity() {
                             )
                         )
                     },
-                    toSignUp = { navController.navigate("signup") }
+                    toSignUp = { navController.navigate("signup") },
+                    toPassword = { navController.navigate("confirm_email") }
                 )
             }
             composable("signup") {
@@ -60,7 +63,33 @@ class StartActivity : ComponentActivity() {
             }
             composable("confirm") {
                 ConfirmScreen(
-                    back = { navController.popBackStack() }
+                    back = { navController.popBackStack() },
+                    toNext = {
+                        startActivity(
+                            Intent(
+                                this@StartActivity,
+                                RegistrationActivity::class.java
+                            )
+                        )
+                    }
+                )
+            }
+            composable("confirm_email") {
+                ConfirmEmailScreen(
+                    back = { navController.popBackStack() },
+                    toNext = { navController.navigate("confirm_password") }
+                )
+            }
+            composable("confirm_password") {
+                ConfirmScreen(
+                    back = { navController.popBackStack() },
+                    toNext = { navController.navigate("change_password") }
+                )
+            }
+            composable("change_password") {
+                ChangePasswordScreen(
+                    back = { navController.popBackStack() },
+                    toLogin = { navController.navigate("login") }
                 )
             }
         }
