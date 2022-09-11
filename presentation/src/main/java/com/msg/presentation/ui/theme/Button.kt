@@ -9,6 +9,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Icon
+import androidx.compose.material.OutlinedButton
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.runtime.Composable
@@ -23,11 +24,11 @@ import com.skydoves.landscapist.glide.GlideImage
 @Composable
 fun ButtonNormal(
     onClick: () -> Unit,
-    text: String,
+    text: Int,
     buttonColor: Color = Transparent,
     bolder: BorderStroke? = null
 ) {
-    Button(
+    OutlinedButton(
         onClick = onClick,
         modifier = Modifier
             .fillMaxWidth()
@@ -47,15 +48,16 @@ fun ButtonNormal(
 @Composable
 fun ButtonGradient(
     onClick: () -> Unit,
-    text: String,
+    text: Int,
     gradient: Brush = Brush.linearGradient(GradientGray),
 ) {
-    Button(
+    OutlinedButton(
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(
             backgroundColor = Transparent,
             contentColor = White1
-        )
+        ),
+        border = BorderStroke(0.dp, Transparent)
     ) {
         Box(
             modifier = Modifier
@@ -72,18 +74,18 @@ fun ButtonGradient(
 @Composable
 fun ButtonDisable(
     onClick: () -> Unit,
-    text: String,
+    text: Int,
     gradient: Brush = Brush.linearGradient(GradientPurple),
     enabled: Boolean
 ) {
-    if(enabled) ButtonGradient(onClick = {  }, text = text)
-    else ButtonGradient(onClick = { onClick() }, text = text, gradient = gradient)
+    if(enabled) ButtonGradient(onClick = { onClick() }, text = text, gradient = gradient)
+    else ButtonGradient(onClick = {  }, text = text)
 }
 
 @Composable
 fun ButtonAddCard(
     onClick: () -> Unit,
-    text: String,
+    text: Int,
     uri: Uri?
 ) {
     if (uri == null) {
