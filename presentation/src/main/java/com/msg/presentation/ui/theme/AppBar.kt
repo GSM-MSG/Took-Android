@@ -20,19 +20,24 @@ fun TookAppBar(
             .fillMaxWidth()
             .height(44.dp)
     ) {
-        Icon(
-            imageVector = Icons.Rounded.ArrowBackIos,
-            contentDescription = null,
-            modifier = Modifier
-                .padding(start = 16.dp)
-                .clickable {
-                    back()
-                },
-            tint = White1
-        )
+        Box(
+            modifier = Modifier.fillMaxHeight(),
+            contentAlignment = Alignment.Center
+        ) {
+            Icon(
+                imageVector = Icons.Rounded.ArrowBackIos,
+                contentDescription = null,
+                modifier = Modifier
+                    .padding(start = 16.dp)
+                    .clickable {
+                        back()
+                    },
+                tint = White1
+            )
+        }
         Row(
             modifier = Modifier
-                .fillMaxWidth(),
+                .fillMaxSize(),
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
         ) {
