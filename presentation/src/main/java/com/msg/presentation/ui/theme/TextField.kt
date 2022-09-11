@@ -63,7 +63,7 @@ fun TextFieldNormal(
                 .fillMaxWidth()
                 .height(56.dp)
                 .padding(horizontal = 16.dp)
-                .background(Black3),
+                .background(Black3, RoundedCornerShape(16.dp)),
             singleLine = true,
             isError = isError,
             colors = TextFieldDefaults.outlinedTextFieldColors(
