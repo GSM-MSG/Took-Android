@@ -107,13 +107,18 @@ fun BoxNumerText(
 }
 
 @Composable
-fun ErrorText(isError: Boolean, errorMsg: Int) {
+fun ErrorText(
+    isError: Boolean,
+    errorMsg: Int,
+    modifier: Modifier = Modifier
+        .padding(start = 16.dp, top = 4.dp)
+        .height(28.dp)
+) {
     if (isError) {
         Row(
-            modifier = Modifier
-                .padding(start = 16.dp, top = 4.dp)
-                .height(28.dp),
-            verticalAlignment = Alignment.CenterVertically
+            modifier = modifier,
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
         ) {
             Icon(
                 imageVector = Icons.Default.ErrorOutline,
