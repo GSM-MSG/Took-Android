@@ -10,6 +10,7 @@
     <string name="re_password">비밀번호 재설정</string>
     <string name="agreed">약관동의</string>
     <string name="card">명함 등록</string>
+    <string name="card_list">명함 목록</string>
 
 
     <string name="write_email">이메일을 입력해주세요.</string>
