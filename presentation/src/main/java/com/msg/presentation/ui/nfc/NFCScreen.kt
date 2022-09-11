@@ -1,5 +1,6 @@
 package com.msg.presentation.ui.nfc
 
+import android.nfc.NfcAdapter
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.material.Surface
@@ -14,9 +15,9 @@ import com.msg.presentation.R
 import com.msg.presentation.ui.theme.Background
 
 @Composable
-fun NFCScreen(onClick: () -> Unit) {
+fun NFCScreen(onClick: () -> Unit, nfcAdapter: NfcAdapter? = null) {
 
-    var isLottieAnimationPlaying by remember{ mutableStateOf(true) }
+    var isLottieAnimationPlaying by remember { mutableStateOf(false) }
 
     val compositionResult: LottieCompositionResult =
         rememberLottieComposition(spec = LottieCompositionSpec.RawRes(R.raw.nfc_effect))
@@ -31,7 +32,7 @@ fun NFCScreen(onClick: () -> Unit) {
         Background()
         LottieAnimation(
             composition = compositionResult.value,
-            progress
+            progress = progress,
         )
         Column(
             modifier = Modifier.fillMaxSize(),
@@ -40,9 +41,11 @@ fun NFCScreen(onClick: () -> Unit) {
         ) {
             Button(
                 onClick = {
-                    onClick()
-                    isLottieAnimationPlaying = !isLottieAnimationPlaying
-                          },
+                    if(nfcAdapter != null) {
+                        onClick()
+                        isLottieAnimationPlaying = !isLottieAnimationPlaying
+                    }
+                },
                 modifier = Modifier
                     .width(300.dp)
                     .height(50.dp)
