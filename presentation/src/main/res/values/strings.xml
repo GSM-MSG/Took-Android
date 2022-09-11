@@ -27,8 +27,9 @@
 
 <!-- error text   -->
     <string name="wrong_login">이메일또는 비밀번호가 잘못되었습니다.</string>
-    <string name="wrong_re_password">등록되지 않은 닉네임입니다.</string>
+    <string name="wrong_email">등록되지 않은 닉네임입니다.</string>
     <string name="wrong_confirm">인증번호가 일치하지 않습니다.</string>
+    <string name="wrong_confirm_password">비밀번호가 일치하지 않습니다.</string>
     
     
     <string name="my_card">내 명함</string>
