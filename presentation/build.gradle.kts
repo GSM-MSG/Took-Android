@@ -63,4 +63,5 @@ dependencies {
     androidTestImplementation(Dependency.AndroidTest.ESPRESSO_CORE)
     androidTestImplementation(Dependency.ComposeTest.COMPOSE_TEST)
     debugImplementation(Dependency.Compose.COMPOSE_TOOLING)
+    implementation(Dependency.Lottie.LOTTIE)
 }
