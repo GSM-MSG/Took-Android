@@ -3,6 +3,7 @@ package com.msg.presentation.ui.confirm
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -17,13 +18,41 @@ import com.msg.presentation.ui.theme.*
 fun ConfirmScreen(back: () -> Unit) {
     var confirmArray by remember { mutableStateOf<Array<Int?>>(arrayOf(null, null, null, null)) }
     var currentConfirm by remember { mutableStateOf(0) }
+    var isError by remember { mutableStateOf(false) }
+    fun isNumber() {
+        var password = ""
+        confirmArray.forEachIndexed { index, it ->
+            when (it) {
+                R.string.one -> password += "1"
+                R.string.two -> password += "2"
+                R.string.three -> password += "3"
+                R.string.four -> password += "4"
+                R.string.five -> password += "5"
+                R.string.six -> password += "6"
+                R.string.seven -> password += "7"
+                R.string.eight -> password += "8"
+                R.string.nine -> password += "9"
+                R.string.zero -> password += "0"
+            }
+        }
+        confirmArray = arrayOf(null, null, null, null)
+        currentConfirm = 0
+        if (password.equals("1234")) {
+
+        } else {
+            isError = true
+        }
+    }
+
     fun writeText(number: Int) {
+        isError = false
         if (number != 10 && currentConfirm <= 2) {
             confirmArray[currentConfirm++] = number
         } else if (number == 10 && currentConfirm > 0) {
             confirmArray[--currentConfirm] = null
         } else if (currentConfirm == 3) {
             confirmArray[currentConfirm++] = number
+            isNumber()
         }
     }
     Background()
@@ -43,6 +72,15 @@ fun ConfirmScreen(back: () -> Unit) {
         )
         ConfirmNumber(confirmArray = confirmArray, current = currentConfirm)
         Spacer(modifier = Modifier.weight(1f))
+        ErrorText(
+            isError = isError,
+            errorMsg = R.string.wrong_confirm,
+            modifier = Modifier
+                .padding(start = 16.dp, end = 16.dp, bottom = 16.dp)
+                .fillMaxWidth()
+                .height(50.dp)
+                .background(White1, RoundedCornerShape(8.dp))
+        )
         CustomKeyboard(writeText = { writeText(it) })
     }
 }
