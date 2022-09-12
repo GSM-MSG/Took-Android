@@ -52,7 +52,7 @@ fun ChangePasswordScreen(back: () -> Unit, toLogin: () -> Unit) {
             iconClick = { visibleConfirmPassword = !visibleConfirmPassword },
             keyboardType = KeyboardType.Password
         )
-        ErrorText(isError = isError, errorMsg = R.string.wrong_re_password)
+        ErrorText(isError = isError, errorMsg = R.string.wrong_confirm_password)
         Spacer(modifier = Modifier.weight(1f))
         ButtonDisable(
             onClick = { confirmPassword() },
