@@ -103,7 +103,19 @@ class NFCActivity : ComponentActivity() {
 
     @Throws(UnsupportedEncodingException::class)
     private fun createRecord(text: String): NdefRecord {
+        val lang = "en"
+        val textBytes = text.toByteArray()
+        val langBytes = lang.toByteArray("US-ASCII" as Charset)
+        val langLength = langBytes.size
+        val textLength = textBytes.size
+        val payload = ByteArray(1 + langLength + textLength)
 
+        payload[0] = langLength.toByte()
+
+        System.arraycopy(langBytes, 0, payload, 1, langLength)
+        System.arraycopy(textBytes, 0, payload, 1 + textLength, textLength)
+
+        return NdefRecord(NdefRecord.TNF_WELL_KNOWN, NdefRecord.RTD_TEXT, ByteArray(0), payload)
     }
 
 }
