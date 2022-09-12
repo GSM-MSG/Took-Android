@@ -12,10 +12,12 @@ import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import com.msg.presentation.R
+import dagger.hilt.android.AndroidEntryPoint
 import java.io.IOException
 import java.io.UnsupportedEncodingException
 import java.nio.charset.Charset
 
+@AndroidEntryPoint
 class NFCActivity : ComponentActivity() {
 
     private lateinit var nfcPendingIntent: PendingIntent
@@ -116,6 +118,15 @@ class NFCActivity : ComponentActivity() {
         System.arraycopy(textBytes, 0, payload, 1 + textLength, textLength)
 
         return NdefRecord(NdefRecord.TNF_WELL_KNOWN, NdefRecord.RTD_TEXT, ByteArray(0), payload)
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        setIntent(intent)
+        readFromIntent(intent!!)
+        if(NfcAdapter.ACTION_TAG_DISCOVERED == intent.action) {
+            tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG)!!
+        }
     }
 
 }

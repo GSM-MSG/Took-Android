@@ -22,10 +22,6 @@ class MainActivity : ComponentActivity() {
 
 }
 
-fun buttonClickListener() {
-    Log.d("TAG", "click")
-}
-
 
 @Preview(showBackground = true)
 @Composable
