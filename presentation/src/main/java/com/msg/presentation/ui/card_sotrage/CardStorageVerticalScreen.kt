@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -26,7 +27,8 @@ fun CardStorageVerticalScreen(itemList: ArrayList<String>) {
                     .padding(9.dp)
                     .clip(RoundedCornerShape(6.dp))
                     .background(Color.White)
-                    .height(280.dp),
+                    .width(156.dp)
+                    .height(258.dp),
                 contentAlignment = Alignment.Center
             ) {
                 Text(text = itemList[index])
