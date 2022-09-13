@@ -25,7 +25,7 @@ import com.msg.presentation.ui.theme.TookBackground
 @ExperimentalFoundationApi
 fun CardStorageHorizentalScreen(toVertical: () -> Unit) {
     LazyVerticalGrid(cells = GridCells.Fixed(2), content = {
-        items(20) { i ->
+        items(20) {
             Box(
                 modifier = Modifier
                     .padding(9.dp)
