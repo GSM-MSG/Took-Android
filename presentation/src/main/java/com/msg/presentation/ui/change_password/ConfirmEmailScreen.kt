@@ -30,7 +30,7 @@ fun ConfirmEmailScreen(back: () -> Unit, toNext: () -> Unit) {
             placeholder = R.string.write_email,
             isError = isError,
             iconClick = { email = null })
-        ErrorText(isError = isError, errorMsg = R.string.wrong_re_password)
+        ErrorText(isError = isError, errorMsg = R.string.wrong_email)
         Spacer(modifier = Modifier.weight(1f))
         ButtonDisable(
             onClick = { confirmEmail() },
