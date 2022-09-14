@@ -3,11 +3,11 @@ package com.msg.presentation.ui.nfc
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import android.content.IntentFilter
 import android.nfc.*
 import android.nfc.tech.Ndef
 import android.os.Bundle
 import android.os.Parcelable
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -23,24 +23,85 @@ class NFCActivity : ComponentActivity() {
     private lateinit var nfcPendingIntent: PendingIntent
     private var nfcAdapter: NfcAdapter? = null
     private lateinit var tag: Tag
+    private val TAG: String = "NFCActivity_TAG"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        nfcAdapter = NfcAdapter.getDefaultAdapter(this)
+
+        this.nfcAdapter = NfcAdapter.getDefaultAdapter(this)
+        nfcPendingIntent = PendingIntent.getActivity(
+            this, 0,
+            Intent(this, javaClass), PendingIntent.FLAG_IMMUTABLE
+        )
         if (nfcAdapter == null) {
             Toast.makeText(this, R.string.not_support_NFC, Toast.LENGTH_SHORT).show()
         }
-        readFromIntent(intent)
-        val intent = Intent(baseContext, this::class.java).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
-        nfcPendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
-        val tagDetected = IntentFilter(NfcAdapter.ACTION_TAG_DISCOVERED)
-        tagDetected.addCategory(Intent.CATEGORY_DEFAULT)
-        val writeTagFilter = IntentFilter()
+
+//        readFromIntent(intent)
+//        val intent = Intent(this, this::class.java).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+//        nfcPendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
+//        val tagDetected = IntentFilter(NfcAdapter.ACTION_TAG_DISCOVERED)
+//        tagDetected.addCategory(Intent.CATEGORY_DEFAULT)
+//        val writeTagFilter = IntentFilter()
+//        tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG)!!
+
 
         setContent {
             NFCScreen(onClick = { checkNFC(this) }, nfcAdapter = nfcAdapter)
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+        nfcAdapter?.enableForegroundDispatch(this, nfcPendingIntent, null, null)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        nfcAdapter?.disableForegroundDispatch(this)
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+
+        val detectedTag: Tag? = intent?.getParcelableExtra(NfcAdapter.EXTRA_TAG)
+        val writeValue: String = "test"
+        val message: NdefMessage = createTagMessage(writeValue);
+
+        if(detectedTag != null) writeTag(message, detectedTag)
+
+//        setIntent(intent)
+//        readFromIntent(intent!!)
+//        if(NfcAdapter.ACTION_TAG_DISCOVERED == intent.action) {
+//            tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG)!!
+//        }
+    }
+
+    private fun createTagMessage(msg: String): NdefMessage {
+        return NdefMessage(NdefRecord.createUri(msg))
+    }
+
+    private fun writeTag(message: NdefMessage, tag: Tag) {
+        val size = message.toByteArray().size
+        try {
+            val ndef = Ndef.get(tag)
+            if (ndef != null) {
+                ndef.connect()
+                if (!ndef.isWritable) {
+                    Toast.makeText(applicationContext, "can not write NFC tag", Toast.LENGTH_SHORT).show()
+                }
+                if (ndef.maxSize < size) {
+                    Toast.makeText(applicationContext, "NFC tag size too large", Toast.LENGTH_SHORT).show()
+                }
+                ndef.writeNdefMessage(message)
+                Toast.makeText(applicationContext, "NFC tag is writted", Toast.LENGTH_SHORT).show()
+            }
+        } catch (e: Exception) {
+            Log.i(TAG,e.message!!)
+            e.printStackTrace()
+        }
+    }
+
 
     //    버튼을 클릭하였을 때 쓰기 모드로 변환하기
     private fun checkNFC(context: Context) {
@@ -67,10 +128,11 @@ class NFCActivity : ComponentActivity() {
             NfcAdapter.ACTION_TECH_DISCOVERED == action ||
             NfcAdapter.ACTION_TAG_DISCOVERED == action
         ) {
-            val rawMsgs: Array<Parcelable> = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES) as Array<Parcelable>
+            val rawMsgs: Array<Parcelable> =
+                intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES) as Array<Parcelable>
             val msgs = mutableListOf<NdefMessage>()
 
-            for(i in 0..rawMsgs.size){
+            for (i in 0..rawMsgs.size) {
                 msgs.add(i, rawMsgs[i] as NdefMessage)
             }
             buildTagViews(msgs)
@@ -78,15 +140,20 @@ class NFCActivity : ComponentActivity() {
     }
 
     private fun buildTagViews(msgs: MutableList<NdefMessage>) {
-        if(msgs.isNullOrEmpty()) {
+        if (msgs.isNullOrEmpty()) {
             var text = ""
             val payload: ByteArray = msgs[0].records[0].payload
-            val textEncoding = if((payload[0].toInt() and 128 ) == 0) "UTF-8" else "UTF-16"
+            val textEncoding = if ((payload[0].toInt() and 128) == 0) "UTF-8" else "UTF-16"
             val languageCodeLength = payload[0].toInt() and 63
 
             try {
-                text = String(payload, languageCodeLength + 1, payload.size - languageCodeLength - 1, textEncoding as Charset)
-            }catch(e: UnsupportedEncodingException){
+                text = String(
+                    payload,
+                    languageCodeLength + 1,
+                    payload.size - languageCodeLength - 1,
+                    textEncoding as Charset
+                )
+            } catch (e: UnsupportedEncodingException) {
                 e.printStackTrace()
             }
         } else return
@@ -119,15 +186,5 @@ class NFCActivity : ComponentActivity() {
 
         return NdefRecord(NdefRecord.TNF_WELL_KNOWN, NdefRecord.RTD_TEXT, ByteArray(0), payload)
     }
-
-    override fun onNewIntent(intent: Intent?) {
-        super.onNewIntent(intent)
-        setIntent(intent)
-        readFromIntent(intent!!)
-        if(NfcAdapter.ACTION_TAG_DISCOVERED == intent.action) {
-            tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG)!!
-        }
-    }
-
 }
 
