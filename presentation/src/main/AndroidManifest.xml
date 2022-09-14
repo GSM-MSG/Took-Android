@@ -13,14 +13,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TookAndroid">
         <activity
-            android:name=".ui.registration.RegistrationActivity"
-            android:exported="false"
-            android:label="@string/title_activity_registration"
-            android:theme="@style/Theme.TookAndroid" >
-        </activity>
-        <activity android:name=".ui.start.StartActivity"
+            android:name=".ui.home.HomeActivity"
             android:exported="true"
-            android:windowSoftInputMode="adjustResize">
+            android:label="@string/title_activity_home"
+            android:theme="@style/Theme.TookAndroid">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,11 +24,23 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.registration.RegistrationActivity"
             android:exported="false"
-            android:label="@string/app_name"
+            android:label="@string/title_activity_registration"
             android:theme="@style/Theme.TookAndroid">
+
         </activity>
+        <activity
+            android:name=".ui.start.StartActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize">
+
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.TookAndroid"></activity>
     </application>
 
 </manifest>

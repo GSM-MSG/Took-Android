@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">Took</string>
     <string name="title_activity_registration">RegistrationActivity</string>
-<!-- title text   -->
+    <string name="title_activity_home">HomeActivity</string>
+    <!-- title text   -->
     <string name="email">이메일</string>
     <string name="password">비밀번호</string>
     <string name="login">로그인</string>
@@ -10,6 +11,7 @@
     <string name="re_password">비밀번호 재설정</string>
     <string name="agreed">약관동의</string>
     <string name="card">명함 등록</string>
+    <string name="card_list">명함 목록</string>
 
 
     <string name="write_email">이메일을 입력해주세요.</string>
@@ -25,20 +27,20 @@
     <string name="divide">|</string>
     <string name="okay">확인</string>
 
-<!-- error text   -->
+    <!-- error text   -->
     <string name="wrong_login">이메일또는 비밀번호가 잘못되었습니다.</string>
     <string name="wrong_email">등록되지 않은 닉네임입니다.</string>
     <string name="wrong_confirm">인증번호가 일치하지 않습니다.</string>
     <string name="wrong_confirm_password">비밀번호가 일치하지 않습니다.</string>
-    
-    
+
+
     <string name="my_card">내 명함</string>
     <string name="set_card">명함 등록하기</string>
     <string name="set_card_front">앞면 등록하기</string>
     <string name="set_card_back">뒷면 등록하기</string>
     <string name="finish_set_card">등록완료!</string>
 
-<!-- keyboard -->
+    <!-- keyboard -->
     <string name="one">1</string>
     <string name="two">2</string>
     <string name="three">3</string>
