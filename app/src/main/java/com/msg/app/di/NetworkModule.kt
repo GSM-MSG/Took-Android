@@ -2,6 +2,7 @@ package com.msg.app.di
 
 
 import com.msg.app.utils.BASE_URL
+import com.msg.data.remote.network.EmailAPI
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -47,5 +48,11 @@ object NetworkModule {
     @Singleton
     fun provideConverterFactory(): GsonConverterFactory {
         return GsonConverterFactory.create()
+    }
+
+    @Provides
+    @Singleton
+    fun provideEmailService(retrofit: Retrofit): EmailAPI {
+        return retrofit.create(EmailAPI::class.java)
     }
 }
