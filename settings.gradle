@@ -13,7 +13,7 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "Took-Android"
-include ':presentation'
+include ':app'
 include ':domain'
 include ':data'
-include ':app'
+include ':presentation'
