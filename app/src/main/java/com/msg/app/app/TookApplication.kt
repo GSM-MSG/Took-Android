@@ -1,4 +1,4 @@
-package com.msg.presentation.app
+package com.msg.app.app
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

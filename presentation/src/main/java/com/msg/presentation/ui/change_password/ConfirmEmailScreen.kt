@@ -6,8 +6,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.msg.presentation.R
 import com.msg.presentation.ui.theme.*
+import com.msg.presentation.R
 
 @Composable
 fun ConfirmEmailScreen(back: () -> Unit, toNext: () -> Unit) {
