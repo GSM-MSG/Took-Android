@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -14,21 +15,42 @@ import androidx.compose.ui.unit.dp
 import com.msg.presentation.MainActivity
 import com.msg.presentation.R
 import com.msg.presentation.ui.theme.*
+import com.msg.presentation.util.UriUtil
+import com.msg.presentation.viewmodel.ImageViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 
 @AndroidEntryPoint
 class RegistrationActivity : ComponentActivity() {
 
     private var frontImageUriState = mutableStateOf<Uri?>(null)
     private var backImageUriState = mutableStateOf<Uri?>(null)
+    private var imageList = mutableListOf<MultipartBody.Part>()
+    private val imageViewModel by viewModels<ImageViewModel>()
 
-    private val selectFrontImageLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
-        frontImageUriState.value = uri
-    }
+    private val selectFrontImageLauncher =
+        registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+            frontImageUriState.value = uri
+            val fileBody: RequestBody =
+                RequestBody.create(MediaType.parse("image/*"), UriUtil.toFile(this, uri!!))
+            val fileName = UriUtil.getFileName(this, uri)
+            val file: MultipartBody.Part =
+                MultipartBody.Part.createFormData("photo", fileName, fileBody)
+            imageList.add(file)
+        }
 
-    private val selectBackImageLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
-        backImageUriState.value = uri
-    }
+    private val selectBackImageLauncher =
+        registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+            backImageUriState.value = uri
+            val fileBody: RequestBody =
+                RequestBody.create(MediaType.parse("image/*"), UriUtil.toFile(this, uri!!))
+            val fileName = UriUtil.getFileName(this, uri)
+            val file: MultipartBody.Part =
+                MultipartBody.Part.createFormData("photo", fileName, fileBody)
+            imageList.add(file)
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
