@@ -11,4 +11,8 @@ class EmailDataSourceImpl @Inject constructor(
     override suspend fun sendEmail(email: String): Response<Void> {
         return emailAPI.sendEmail(email = email)
     }
+
+    override suspend fun verifyCode(email: String, code: String): Response<Void> {
+        return emailAPI.verifyCode(email = email, code = code)
+    }
 }

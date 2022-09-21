@@ -11,4 +11,8 @@ class EmailRepositoryImpl @Inject constructor(
     override suspend fun sendEmail(email: String): Response<Void> {
         return emailDataSource.sendEmail(email = email)
     }
+
+    override suspend fun verifyCode(email: String, code: String): Response<Void> {
+        return emailDataSource.verifyCode(email = email, code = code)
+    }
 }

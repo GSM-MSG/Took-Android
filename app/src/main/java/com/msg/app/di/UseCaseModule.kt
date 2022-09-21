@@ -3,6 +3,7 @@ package com.msg.app.di
 import com.msg.domain.repository.EmailRepository
 import com.msg.domain.repository.ImageRepository
 import com.msg.domain.usecase.email.SendEmailUseCase
+import com.msg.domain.usecase.email.VerifyCodeUseCase
 import com.msg.domain.usecase.image.ImageUseCase
 import dagger.Module
 import dagger.Provides
@@ -20,5 +21,9 @@ object UseCaseModule {
     
     @Provides
     @Singleton
-    fun provideSendEmailUseCase(repository: EmailRepository): SendEmailUseCase = SendEmailUseCase(repository)
+    fun provideSendEmailUseCase(repository: EmailRepository) = SendEmailUseCase(repository)
+
+    @Provides
+    @Singleton
+    fun provideVerifyCodeUseCase(repository: EmailRepository) = VerifyCodeUseCase(repository)
 }
