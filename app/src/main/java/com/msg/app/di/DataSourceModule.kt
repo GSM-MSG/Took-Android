@@ -1,5 +1,6 @@
 package com.msg.app.di
 
+import com.msg.data.remote.datasource.datasource.EmailDataSource
 import com.msg.data.remote.datasource.datasourceImpl.EmailDataSourceImpl
 import com.msg.data.remote.datasource.datasourceImpl.ImageDataSourceImpl
 import com.msg.data.remote.network.EmailAPI
@@ -20,5 +21,5 @@ object DataSourceModule {
 
     @Provides
     @Singleton
-    fun provideEmailDataSource(api: EmailAPI) = EmailDataSourceImpl(api)
+    fun provideEmailDataSource(api: EmailAPI): EmailDataSource = EmailDataSourceImpl(api)
 }
