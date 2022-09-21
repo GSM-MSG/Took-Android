@@ -1,5 +1,5 @@
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     id("org.jetbrains.kotlin.android")
     id("dagger.hilt.android.plugin")
     kotlin("kapt")
@@ -9,13 +9,11 @@ android {
     compileSdk = Versions.COMPILE_SDK_VERSION
 
     defaultConfig {
-        applicationId = "com.msg.took_android"
         minSdk = Versions.MIN_SDK_VERSION
         targetSdk = Versions.TARGET_SDK_VERSION
-        versionCode = 1
-        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -59,6 +57,7 @@ dependencies {
     implementation(Dependency.Compose.COMPOSE_MATERAIL)
     implementation(Dependency.Compose.COMPOSE_PREVIEW)
     implementation(Dependency.Compose.COMPOSE_NAV)
+    implementation(Dependency.Compose.COMPOSE_NAV_ANIMATION)
     implementation(Dependency.AndroidX.LIFECYCLE_RUNTIME)
     implementation(Dependency.AndroidX.ACTIVITY_COMPOSE)
     implementation(Dependency.Compose.COMPOSE_ICONS)

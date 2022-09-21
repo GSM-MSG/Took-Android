@@ -6,8 +6,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.msg.presentation.R
 import com.msg.presentation.ui.theme.*
+import com.msg.presentation.R
 
 @Composable
 fun ConfirmEmailScreen(back: () -> Unit, toNext: () -> Unit) {
@@ -30,7 +30,7 @@ fun ConfirmEmailScreen(back: () -> Unit, toNext: () -> Unit) {
             placeholder = R.string.write_email,
             isError = isError,
             iconClick = { email = null })
-        ErrorText(isError = isError, errorMsg = R.string.wrong_re_password)
+        ErrorText(isError = isError, errorMsg = R.string.wrong_email)
         Spacer(modifier = Modifier.weight(1f))
         ButtonDisable(
             onClick = { confirmEmail() },

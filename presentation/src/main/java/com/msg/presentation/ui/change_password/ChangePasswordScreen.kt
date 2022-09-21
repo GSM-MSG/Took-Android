@@ -7,8 +7,8 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import com.msg.presentation.R
 import com.msg.presentation.ui.theme.*
+import com.msg.presentation.R
 
 @Composable
 fun ChangePasswordScreen(back: () -> Unit, toLogin: () -> Unit) {
@@ -52,7 +52,7 @@ fun ChangePasswordScreen(back: () -> Unit, toLogin: () -> Unit) {
             iconClick = { visibleConfirmPassword = !visibleConfirmPassword },
             keyboardType = KeyboardType.Password
         )
-        ErrorText(isError = isError, errorMsg = R.string.wrong_re_password)
+        ErrorText(isError = isError, errorMsg = R.string.wrong_confirm_password)
         Spacer(modifier = Modifier.weight(1f))
         ButtonDisable(
             onClick = { confirmPassword() },
