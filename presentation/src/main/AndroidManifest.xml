@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.msg.presentation">
+
+    <uses-permission android:name="android.permission.NFC" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
     <application>
         <activity
             android:name="com.msg.presentation.ui.home.HomeActivity"
@@ -22,7 +26,24 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.msg.presentation.MainActivity"
-            android:exported="true"></activity>
+            android:name="com.msg.presentation.ui.main.MainActivity"
+            android:exported="true">
+
+        </activity>
+
+        <activity android:name=".ui.nfc.NFCActivity"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="android.nfc.action.TAG_DISCOVERED" />
+                <action android:name="android.nfc.action.TECH_DISCOVERED" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.nfc.action.TECH_DISCOVERED"
+                android:resource="@xml/nfc_tech_filter" />
+        </activity>
     </application>
 </manifest>
