@@ -1,8 +1,11 @@
 package com.msg.app.di
 
+import com.msg.data.remote.datasource.datasource.AuthDataSource
 import com.msg.data.remote.datasource.datasource.EmailDataSource
+import com.msg.data.remote.datasource.datasourceImpl.AuthDataSourceImpl
 import com.msg.data.remote.datasource.datasourceImpl.EmailDataSourceImpl
 import com.msg.data.remote.datasource.datasourceImpl.ImageDataSourceImpl
+import com.msg.data.remote.network.AuthAPI
 import com.msg.data.remote.network.EmailAPI
 import com.msg.data.remote.network.ImageAPI
 import dagger.Module
@@ -22,4 +25,8 @@ object DataSourceModule {
     @Provides
     @Singleton
     fun provideEmailDataSource(api: EmailAPI): EmailDataSource = EmailDataSourceImpl(api)
+
+    @Provides
+    @Singleton
+    fun provideAuthDataSource(api: AuthAPI): AuthDataSource = AuthDataSourceImpl(api)
 }
