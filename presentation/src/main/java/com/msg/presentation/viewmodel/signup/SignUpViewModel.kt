@@ -5,6 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.msg.domain.param.InfoParam
+import com.msg.domain.usecase.auth.SignUpUseCase
 import com.msg.domain.usecase.email.SendEmailUseCase
 import com.msg.domain.usecase.email.VerifyCodeUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,7 +16,8 @@ import javax.inject.Inject
 @HiltViewModel
 class SignUpViewModel @Inject constructor(
     private val sendEmailUseCase: SendEmailUseCase,
-    private val verifyCodeUseCase: VerifyCodeUseCase
+    private val verifyCodeUseCase: VerifyCodeUseCase,
+    private val signUpUseCase: SignUpUseCase
 ): ViewModel() {
     private val _email = MutableLiveData<String>()
     val email: LiveData<String> get() = _email
@@ -38,9 +41,16 @@ class SignUpViewModel @Inject constructor(
 
     fun verifyCode(code: String) = viewModelScope.launch {
         try {
-            val response = verifyCodeUseCase.verifyCode(email.value!!, code)
-            _state.value = response.code()
-            Log.d("안녕", "verifyCode: ${response.code()}")
+            _state.value = verifyCodeUseCase.verifyCode(email.value!!, code).code()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    fun signUp() = viewModelScope.launch {
+        try {
+            val response = signUpUseCase.signUp(InfoParam(email = email.value!!, password = password.value!!))
+            Log.d("안녕", "signUp: ${response.code()}")
         } catch (e: Exception) {
             e.printStackTrace()
         }

@@ -1,5 +1,6 @@
 package com.msg.presentation.ui.confirm
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -24,6 +25,8 @@ fun ConfirmScreen(back: () -> Unit, toNext: () -> Unit, signUpViewModel: SignUpV
     var isError by remember { mutableStateOf(false) }
     signUpViewModel?.state?.observe(LocalLifecycleOwner.current) {
         if (it == 200) {
+            signUpViewModel.signUp()
+//            Log.d("안녕", "ConfirmScreen: ")
             toNext()
         } else {
             isError = true
@@ -31,7 +34,6 @@ fun ConfirmScreen(back: () -> Unit, toNext: () -> Unit, signUpViewModel: SignUpV
     }
     fun isNumber() {
         var password = ""
-        var state = 0
         confirmArray.forEachIndexed { index, it ->
             when (it) {
                 R.string.one -> password += "1"
