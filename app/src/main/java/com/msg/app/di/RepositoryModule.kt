@@ -26,9 +26,11 @@ object RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideEmailRepository(dataSource: EmailDataSource): EmailRepository = EmailRepositoryImpl(dataSource)
+    fun provideEmailRepository(dataSource: EmailDataSource): EmailRepository =
+        EmailRepositoryImpl(dataSource)
 
     @Provides
     @Singleton
-    fun provideAuthRepository(dataSource: AuthDataSource): AuthRepository = AuthRepositoryImpl(dataSource)
+    fun provideAuthRepository(dataSource: AuthDataSource): AuthRepository =
+        AuthRepositoryImpl(dataSource)
 }
