@@ -2,6 +2,7 @@ package com.msg.app.di
 
 
 import com.msg.app.utils.BASE_URL
+import com.msg.data.remote.network.ImageAPI
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -47,5 +48,11 @@ object NetworkModule {
     @Singleton
     fun provideConverterFactory(): GsonConverterFactory {
         return GsonConverterFactory.create()
+    }
+
+    @Provides
+    @Singleton
+    fun provideCommonService(retrofit: Retrofit): ImageAPI {
+        return retrofit.create(ImageAPI::class.java)
     }
 }

@@ -3,6 +3,7 @@ package com.msg.presentation.ui.registration
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
@@ -38,6 +39,7 @@ class RegistrationActivity : ComponentActivity() {
             val fileName = UriUtil.getFileName(this, uri)
             val file: MultipartBody.Part =
                 MultipartBody.Part.createFormData("photo", fileName, fileBody)
+            Log.d("file", file.toString())
             imageList.add(file)
         }
 
@@ -49,7 +51,9 @@ class RegistrationActivity : ComponentActivity() {
             val fileName = UriUtil.getFileName(this, uri)
             val file: MultipartBody.Part =
                 MultipartBody.Part.createFormData("photo", fileName, fileBody)
+            Log.d("file", file.toString())
             imageList.add(file)
+            imageViewModel.postImage(imageList)
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -112,7 +116,9 @@ class RegistrationActivity : ComponentActivity() {
     }
 
     private fun cardRegistraion() {
+        if (imageViewModel.imageStatus.value == true) {
 
+        }
     }
 }
 
