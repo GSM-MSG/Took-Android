@@ -57,68 +57,65 @@ class NFCActivity : ComponentActivity() {
 
     override fun onPause() {
         super.onPause()
-        if(this.isFinishing) nfcAdapter?.disableForegroundDispatch(this@NFCActivity)
+        if (this.isFinishing) nfcAdapter?.disableForegroundDispatch(this@NFCActivity)
     }
 
+
+    private var cardId = ""
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
-        try {
-            val id = "good"
 
-            if (NfcAdapter.ACTION_TECH_DISCOVERED == intent.action
-                || NfcAdapter.ACTION_NDEF_DISCOVERED == intent.action
-            ) {
-                val tag = intent.getParcelableExtra<Tag>(NfcAdapter.EXTRA_TAG) ?: return
-                val ndef = Ndef.get(tag) ?: return
-
-                if (ndef.isWritable) {
-                    var message = NdefMessage(arrayOf(NdefRecord.createTextRecord("en", id)))
-
-                    ndef.connect()
-                    ndef.writeNdefMessage(message)
-                    ndef.close()
-
-                    Toast.makeText(applicationContext, "Successfully Wroted!", Toast.LENGTH_SHORT).show()
-                }
-            } else {
-                Toast.makeText(applicationContext, "Write on text box!", Toast.LENGTH_SHORT).show()
-            }
-        } catch (e: Exception) {
-            e.message
-        }
         Log.d(TAG, "onNewIntent")
+        val action = intent.action
+        if (NfcAdapter.ACTION_NDEF_DISCOVERED == action && isRunNFC) {
+            val parcelables = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES)
+            val id = "goose"
+            try {
+                val inNdefMessage = parcelables!![0] as NdefMessage
+                val inNdefRecords = inNdefMessage.records
+                var ndefRecord0 = inNdefRecords[0]
+                var inMessage = String(ndefRecord0.payload)
+                cardId = inMessage.drop(3)
+                Log.d(TAG, cardId)
+
+                if (id != "") {
+                    if (NfcAdapter.ACTION_TECH_DISCOVERED == action || NfcAdapter.ACTION_NDEF_DISCOVERED == action) {
+                        val tag = intent.getParcelableExtra<Tag>(NfcAdapter.EXTRA_TAG) ?: return
+                        val ndef = Ndef.get(tag) ?: return
+
+                        if (ndef.isWritable) {
+                            var message = createTagMessage(id)
+
+                            ndef.connect()
+                            ndef.writeNdefMessage(message)
+                            ndef.close()
+
+                            Log.d(TAG, "write success")
+                        }
+                    }
+                } else {
+                    try {
+                        ndefRecord0 = inNdefRecords[2]
+                        inMessage = String(ndefRecord0.payload)
+
+                        Log.d(TAG, "USER ID: " + inMessage.drop(3))
+                    } catch (ex: java.lang.Exception) {
+                        Toast.makeText(
+                            applicationContext,
+                            "User ID not writted!",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+            } catch (e: Exception) {
+                e.message
+            }
+        }
     }
 
-//    private fun createTagMessage(msg: String): NdefMessage {
-//        return NdefMessage(NdefRecord.createTextRecord("en", msg))
-//    }
-//
-//    private fun writeTag(message: NdefMessage, tag: Tag) {
-//        val size = message.toByteArray().size
-//        try {
-//            val ndef = Ndef.get(tag)
-//            if (ndef != null) {
-//                ndef.connect()
-//                Toast.makeText(applicationContext, "NFC connect", Toast.LENGTH_SHORT).show()
-//                if (!ndef.isWritable) {
-//                    Toast.makeText(applicationContext, "can not write NFC tag", Toast.LENGTH_SHORT)
-//                        .show()
-//                }
-//                if (ndef.maxSize < size) {
-//                    Toast.makeText(applicationContext, "NFC tag size too large", Toast.LENGTH_SHORT)
-//                        .show()
-//                }
-//                ndef.writeNdefMessage(message)
-//                Toast.makeText(applicationContext, "NFC tag is writted", Toast.LENGTH_SHORT).show()
-//            } else Toast.makeText(applicationContext, "NFC connect failed", Toast.LENGTH_SHORT)
-//                .show()
-//        } catch (e: Exception) {
-//            Log.i(TAG, e.message!!)
-//            Toast.makeText(applicationContext, "Exception", Toast.LENGTH_SHORT).show()
-//            e.printStackTrace()
-//        }
-//    }
-
+    private fun createTagMessage(msg: String): NdefMessage {
+        return NdefMessage(NdefRecord.createTextRecord("en", msg))
+    }
 
     //    버튼을 클릭하였을 때 쓰기 모드로 변환하기
     private fun checkNFC(context: Context) {
