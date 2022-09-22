@@ -2,6 +2,7 @@ package com.msg.app.di
 
 
 import com.msg.app.utils.BASE_URL
+import com.msg.data.remote.network.BusinessCardAPI
 import com.msg.data.remote.network.ImageAPI
 import dagger.Module
 import dagger.Provides
@@ -52,7 +53,14 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideCommonService(retrofit: Retrofit): ImageAPI {
+    fun provideImageService(retrofit: Retrofit): ImageAPI {
         return retrofit.create(ImageAPI::class.java)
     }
+
+    @Provides
+    @Singleton
+    fun provideBusinessCardService(retrofit: Retrofit): BusinessCardAPI {
+        return retrofit.create(BusinessCardAPI::class.java)
+    }
+
 }
