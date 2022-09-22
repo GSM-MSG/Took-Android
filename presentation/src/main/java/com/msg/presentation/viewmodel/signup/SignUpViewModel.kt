@@ -1,14 +1,13 @@
 package com.msg.presentation.viewmodel.signup
 
-import android.util.Log
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.msg.domain.param.InfoParam
 import com.msg.domain.usecase.auth.SignUpUseCase
 import com.msg.domain.usecase.email.SendEmailUseCase
 import com.msg.domain.usecase.email.VerifyCodeUseCase
+import com.msg.presentation.utils.SingleLiveEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -19,11 +18,11 @@ class SignUpViewModel @Inject constructor(
     private val verifyCodeUseCase: VerifyCodeUseCase,
     private val signUpUseCase: SignUpUseCase
 ): ViewModel() {
-    private val _email = MutableLiveData<String>()
+    private val _email = SingleLiveEvent<String>()
     val email: LiveData<String> get() = _email
-    private val _password = MutableLiveData<String>()
+    private val _password = SingleLiveEvent<String>()
     val password: LiveData<String> get() = _password
-    private val _state = MutableLiveData<Int>()
+    private val _state = SingleLiveEvent<Int>()
     val state: LiveData<Int> get() = _state
 
     fun saveInfo(email: String, password: String) {
@@ -49,8 +48,7 @@ class SignUpViewModel @Inject constructor(
 
     fun signUp() = viewModelScope.launch {
         try {
-            val response = signUpUseCase.signUp(InfoParam(email = email.value!!, password = password.value!!))
-            Log.d("안녕", "signUp: ${response.code()}")
+            signUpUseCase.signUp(InfoParam(email = email.value!!, password = password.value!!))
         } catch (e: Exception) {
             e.printStackTrace()
         }
