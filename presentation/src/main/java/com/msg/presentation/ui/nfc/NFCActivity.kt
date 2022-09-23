@@ -95,7 +95,7 @@ class NFCActivity : ComponentActivity() {
                     }
                 } else {
                     try {
-                        ndefRecord0 = inNdefRecords[2]
+                        ndefRecord0 = inNdefRecords[0]
                         inMessage = String(ndefRecord0.payload)
 
                         Log.d(TAG, "USER ID: " + inMessage.drop(3))
