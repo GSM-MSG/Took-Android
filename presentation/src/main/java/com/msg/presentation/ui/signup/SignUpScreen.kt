@@ -13,32 +13,38 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.msg.presentation.R
 import com.msg.presentation.ui.theme.*
+import com.msg.presentation.viewmodel.signup.SignUpViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun SignUpScreen(back: () -> Unit, toLogin: () -> Unit, toConfirm: () -> Unit) {
+fun SignUpScreen(back: () -> Unit, toLogin: () -> Unit, toConfirm: () -> Unit, viewModel: SignUpViewModel) {
     val sheetState = rememberModalBottomSheetState(
         initialValue = ModalBottomSheetValue.Hidden,
         skipHalfExpanded = true
     )
     val scope = rememberCoroutineScope()
+    fun goConfirm() {
+        viewModel.sendEmail()
+        toConfirm()
+    }
     Background()
     ModalBottomSheetLayout(
         sheetState = sheetState,
         sheetBackgroundColor = White1,
         sheetShape = RoundedCornerShape(topStart = 32.dp, topEnd = 32.dp),
         sheetContent = {
-            bottomTerms(toConfirm = { toConfirm() })
+            bottomTerms(toConfirm = { goConfirm() })
         }) {
         Column {
             TookAppBar(back = { back() }, title = R.string.registration)
             signUpField(
                 toLogin = { toLogin() },
                 scope = scope,
-                state = sheetState
+                state = sheetState,
+                viewModel = viewModel
             )
         }
     }
@@ -49,7 +55,8 @@ fun SignUpScreen(back: () -> Unit, toLogin: () -> Unit, toConfirm: () -> Unit) {
 fun signUpField(
     toLogin: () -> Unit,
     scope: CoroutineScope,
-    state: ModalBottomSheetState
+    state: ModalBottomSheetState,
+    viewModel: SignUpViewModel
 ) {
     var email by remember { mutableStateOf<String?>(null) }
     var password by remember { mutableStateOf<String?>(null) }
@@ -60,6 +67,7 @@ fun signUpField(
     fun isSignUp() {
         keyboardController?.hide()
         isError = true
+        viewModel.saveInfo(email!!, password!!)
         scope.launch {
             state.show()
         }
