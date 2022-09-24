@@ -9,15 +9,17 @@ import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.*
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.unit.dp
 import com.msg.presentation.MainActivity
 import com.msg.presentation.R
 import com.msg.presentation.ui.theme.*
-import com.msg.presentation.util.UriUtil
-import com.msg.presentation.viewmodel.ImageViewModel
+import com.msg.presentation.utils.UriUtil
+import com.msg.presentation.viewmodel.businesscard.BusinessCardViewmodel
+import com.msg.presentation.viewmodel.image.ImageViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import okhttp3.MediaType
 import okhttp3.MultipartBody
@@ -30,6 +32,7 @@ class RegistrationActivity : ComponentActivity() {
     private var backImageUriState = mutableStateOf<Uri?>(null)
     private var imageList = mutableListOf<MultipartBody.Part>()
     private val imageViewModel by viewModels<ImageViewModel>()
+    private val businessViewModel by viewModels<BusinessCardViewmodel>()
 
     private val selectFrontImageLauncher =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
@@ -75,7 +78,12 @@ class RegistrationActivity : ComponentActivity() {
     fun RegisterBtn() {
         if (frontImageUriState.value != null && backImageUriState.value != null) {
             ButtonGradient(
-                onClick = { cardRegistraion() },
+                onClick = {
+                    cardRegistraion(
+                        imageViewModel.imageUrl.value!![0],
+                        imageViewModel.imageUrl.value!![1]
+                    )
+                },
                 text = R.string.finish_set_card,
                 Brush.linearGradient(
                     colors = GradientPurple,
@@ -115,9 +123,12 @@ class RegistrationActivity : ComponentActivity() {
         selectBackImageLauncher.launch("image/*")
     }
 
-    private fun cardRegistraion() {
+    private fun cardRegistraion(frontUrl: String, backUrl: String) {
         if (imageViewModel.imageStatus.value == true) {
+            businessViewModel.postBusinessCard(frontUrl, backUrl)
+            businessViewModel.originalCardStatus.observe(this) {
 
+            }
         }
     }
 }

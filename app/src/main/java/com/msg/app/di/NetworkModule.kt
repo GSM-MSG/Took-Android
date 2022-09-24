@@ -2,7 +2,9 @@ package com.msg.app.di
 
 
 import com.msg.app.utils.BASE_URL
+import com.msg.data.remote.network.AuthAPI
 import com.msg.data.remote.network.BusinessCardAPI
+import com.msg.data.remote.network.EmailAPI
 import com.msg.data.remote.network.ImageAPI
 import dagger.Module
 import dagger.Provides
@@ -53,8 +55,20 @@ object NetworkModule {
 
     @Provides
     @Singleton
+    fun provideEmailService(retrofit: Retrofit): EmailAPI {
+        return retrofit.create(EmailAPI::class.java)
+    }
+
+    @Provides
+    @Singleton
     fun provideImageService(retrofit: Retrofit): ImageAPI {
         return retrofit.create(ImageAPI::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideAuthService(retrofit: Retrofit): AuthAPI {
+        return retrofit.create(AuthAPI::class.java)
     }
 
     @Provides
@@ -62,5 +76,4 @@ object NetworkModule {
     fun provideBusinessCardService(retrofit: Retrofit): BusinessCardAPI {
         return retrofit.create(BusinessCardAPI::class.java)
     }
-
 }
