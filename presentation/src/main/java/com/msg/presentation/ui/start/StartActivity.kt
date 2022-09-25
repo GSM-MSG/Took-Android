@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.ExperimentalAnimationApi
@@ -19,10 +20,12 @@ import com.msg.presentation.ui.confirm.ConfirmScreen
 import com.msg.presentation.ui.login.LoginScreen
 import com.msg.presentation.ui.registration.RegistrationActivity
 import com.msg.presentation.ui.signup.SignUpScreen
+import com.msg.presentation.viewmodel.signup.SignUpViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class StartActivity : ComponentActivity() {
+    private val signUpViewModel by viewModels<SignUpViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -77,7 +80,10 @@ class StartActivity : ComponentActivity() {
                     toLogin = { navController.navigate(route = "login") {
                         popUpTo("start")
                     } },
-                    toConfirm = { navController.navigate(route = "confirm") }
+                    toConfirm = { navController.navigate(route = "confirm") {
+                        popUpTo("start")
+                    } },
+                    viewModel = signUpViewModel
                 )
             }
             composable(
@@ -93,7 +99,9 @@ class StartActivity : ComponentActivity() {
                                 RegistrationActivity::class.java
                             )
                         )
-                    }
+                        finish()
+                    },
+                    signUpViewModel = signUpViewModel
                 )
             }
             composable(

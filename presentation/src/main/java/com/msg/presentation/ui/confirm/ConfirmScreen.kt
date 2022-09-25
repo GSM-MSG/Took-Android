@@ -8,17 +8,28 @@ import androidx.compose.material.Icon
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.msg.presentation.R
 import com.msg.presentation.ui.theme.*
+import com.msg.presentation.viewmodel.signup.SignUpViewModel
+import kotlin.coroutines.coroutineContext
 
 @Composable
-fun ConfirmScreen(back: () -> Unit, toNext: () -> Unit) {
+fun ConfirmScreen(back: () -> Unit, toNext: () -> Unit, signUpViewModel: SignUpViewModel? = null) {
     var confirmArray by remember { mutableStateOf<Array<Int?>>(arrayOf(null, null, null, null)) }
     var currentConfirm by remember { mutableStateOf(0) }
     var isError by remember { mutableStateOf(false) }
+    signUpViewModel?.state?.observe(LocalLifecycleOwner.current) {
+        if (it == 200) {
+            signUpViewModel.signUp()
+            toNext()
+        } else {
+            isError = true
+        }
+    }
     fun isNumber() {
         var password = ""
         confirmArray.forEachIndexed { index, it ->
@@ -35,13 +46,9 @@ fun ConfirmScreen(back: () -> Unit, toNext: () -> Unit) {
                 R.string.zero -> password += "0"
             }
         }
+        signUpViewModel?.verifyCode(password)
         confirmArray = arrayOf(null, null, null, null)
         currentConfirm = 0
-        if (password.equals("1234")) {
-            toNext()
-        } else {
-            isError = true
-        }
     }
 
     fun writeText(number: Int) {
