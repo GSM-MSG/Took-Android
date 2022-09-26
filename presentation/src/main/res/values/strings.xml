@@ -51,4 +51,10 @@
     <string name="eight">8</string>
     <string name="nine">9</string>
     <string name="zero">0</string>
+
+<!-- NFC   -->
+    <string name="nfc_tag_available">NFC is not available</string>
+    <string name="write_success">Text Write Successfully</string>
+    <string name="write_error">Failed to write text</string>
+    <string name="not_support_NFC">this device dose not support NFC</string>
 </resources>

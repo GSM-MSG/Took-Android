@@ -69,6 +69,7 @@ dependencies {
     androidTestImplementation(Dependency.AndroidTest.ESPRESSO_CORE)
     androidTestImplementation(Dependency.ComposeTest.COMPOSE_TEST)
     debugImplementation(Dependency.Compose.COMPOSE_TOOLING)
+    implementation(Dependency.Lottie.LOTTIE)
     implementation(Dependency.Libraries.RETROFIT)
     implementation(Dependency.Libraries.RETROFIT_CONVERTER_GSON)
     implementation(Dependency.Libraries.OKHTTP)

@@ -11,8 +11,8 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.unit.dp
-import com.msg.presentation.MainActivity
 import com.msg.presentation.R
+import com.msg.presentation.ui.main.MainActivity
 import com.msg.presentation.ui.theme.*
 import dagger.hilt.android.AndroidEntryPoint
 

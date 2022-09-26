@@ -58,5 +58,5 @@ object Versions {
     const val COIL_VERSION = "2.1.0"
     const val GLIDE_VERSION = "1.4.7"
     const val SHIMMER = "0.5.0"
-    const val LOTTIE_VERSION = "5.2.0"
+    const val LOTTIE_VERSION = "4.0.0"
 }
