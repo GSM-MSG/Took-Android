@@ -2,7 +2,6 @@ package com.msg.presentation.viewmodel.image
 
 import android.util.Log
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.msg.domain.usecase.image.ImageUseCase
@@ -27,6 +26,7 @@ class ImageViewModel @Inject constructor(
 
     fun postImage(imageList: List<MultipartBody.Part>) =
         viewModelScope.launch {
+            Log.d(TAG,"dddd")
             try {
                 val response = useCase.postImage(imageList)
                 if (response.isSuccessful) {

@@ -3,6 +3,7 @@ package com.msg.app.di
 import com.msg.data.remote.datasource.datasource.AuthDataSource
 import com.msg.data.remote.datasource.datasource.BusinessCardDataSource
 import com.msg.data.remote.datasource.datasource.EmailDataSource
+import com.msg.data.remote.datasource.datasource.ImageDataSource
 import com.msg.data.remote.datasource.datasourceImpl.AuthDataSourceImpl
 import com.msg.data.remote.datasource.datasourceImpl.BusinessCardDataSourceImpl
 import com.msg.data.remote.datasource.datasourceImpl.EmailDataSourceImpl
@@ -23,7 +24,7 @@ object DataSourceModule {
 
     @Provides
     @Singleton
-    fun provideImageDataSource(api: ImageAPI) = ImageDataSourceImpl(api)
+    fun provideImageDataSource(api: ImageAPI): ImageDataSource = ImageDataSourceImpl(api)
 
     @Provides
     @Singleton
