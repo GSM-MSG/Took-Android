@@ -27,10 +27,10 @@ class NFCActivity : ComponentActivity() {
     private var pendingIntent: PendingIntent? = null
     private val TAG = "NFCActivity_TAG"
     private var isRunNFC = false
+    private var cardId = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContent {
             NFCScreen(onClick = { checkNFC(this) }, nfcAdapter = nfcAdapter)
         }
@@ -40,7 +40,7 @@ class NFCActivity : ComponentActivity() {
         val ndef = IntentFilter(NfcAdapter.ACTION_NDEF_DISCOVERED)
         try {
             ndef.addDataType("text/plain")
-        } catch (e: Exception) {
+        } catch (e: IntentFilter.MalformedMimeTypeException) {
             throw RuntimeException("fail", e)
         }
         intentFiltersArray = arrayOf(ndef)
@@ -56,12 +56,10 @@ class NFCActivity : ComponentActivity() {
     }
 
     override fun onPause() {
-        super.onPause()
         if (this.isFinishing) nfcAdapter?.disableForegroundDispatch(this@NFCActivity)
+        super.onPause()
     }
 
-
-    private var cardId = ""
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
 
