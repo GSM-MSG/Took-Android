@@ -1,8 +1,7 @@
 package com.msg.data.remote.datasource.datasource
 
-import com.msg.data.remote.dto.response.GetBusinessCardResponse
-import retrofit2.Response
+import com.msg.data.remote.dto.BusinessCard
 
 interface BusinessCardDataSource {
-    suspend fun getBusinessCards(): Response<GetBusinessCardResponse>
+    suspend fun getBusinessCards(): List<BusinessCard>?
 }

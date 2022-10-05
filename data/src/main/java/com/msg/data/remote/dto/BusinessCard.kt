@@ -1,4 +1,4 @@
-package com.msg.data.remote.dto.response
+package com.msg.data.remote.dto
 
 data class BusinessCard(
     val uuid: String,
