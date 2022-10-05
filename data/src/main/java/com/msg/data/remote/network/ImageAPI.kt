@@ -8,7 +8,7 @@ import retrofit2.http.Part
 
 interface ImageAPI {
     @Multipart
-    @POST("image")
+    @POST("/image")
     suspend fun postImage(
         @Part files: List<MultipartBody.Part>
     ): Response<List<String>>

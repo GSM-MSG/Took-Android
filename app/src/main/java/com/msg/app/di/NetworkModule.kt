@@ -3,6 +3,7 @@ package com.msg.app.di
 
 import com.msg.app.utils.BASE_URL
 import com.msg.data.remote.network.AuthAPI
+import com.msg.data.remote.network.BusinessCardsAPI
 import com.msg.data.remote.network.EmailAPI
 import com.msg.data.remote.network.ImageAPI
 import dagger.Module
@@ -68,5 +69,11 @@ object NetworkModule {
     @Singleton
     fun provideAuthService(retrofit: Retrofit): AuthAPI {
         return retrofit.create(AuthAPI::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideBusinessCardsService(retrofit: Retrofit): BusinessCardsAPI {
+        return retrofit.create(BusinessCardsAPI::class.java)
     }
 }
