@@ -1,9 +1,11 @@
 package com.msg.app.di
 
 import com.msg.domain.repository.AuthRepository
+import com.msg.domain.repository.BusinessCardRepository
 import com.msg.domain.repository.EmailRepository
 import com.msg.domain.repository.ImageRepository
 import com.msg.domain.usecase.auth.SignUpUseCase
+import com.msg.domain.usecase.businesscard.GetBusinessCardUseCase
 import com.msg.domain.usecase.email.SendEmailUseCase
 import com.msg.domain.usecase.email.VerifyCodeUseCase
 import com.msg.domain.usecase.image.ImageUseCase
@@ -32,4 +34,8 @@ object UseCaseModule {
     @Provides
     @Singleton
     fun provideSignUpUseCase(repository: AuthRepository) = SignUpUseCase(repository)
+
+    @Provides
+    @Singleton
+    fun provideGetBusinessCardUseCase(repository: BusinessCardRepository) = GetBusinessCardUseCase(repository)
 }
