@@ -2,6 +2,7 @@ package com.msg.presentation.ui.card_sotrage
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -19,7 +20,7 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 @ExperimentalFoundationApi
-fun CardStorageVerticalScreen(itemList: ArrayList<String>) {
+fun CardStorageVerticalScreen(itemList: ArrayList<String>, onClick:() -> Unit) {
     LazyVerticalGrid(cells = GridCells.Fixed(2), content = {
         items(itemList.size) { index ->
             Box(
@@ -28,7 +29,8 @@ fun CardStorageVerticalScreen(itemList: ArrayList<String>) {
                     .clip(RoundedCornerShape(6.dp))
                     .background(Color.White)
                     .width(156.dp)
-                    .height(258.dp),
+                    .height(258.dp)
+                    .clickable { onClick() },
                 contentAlignment = Alignment.Center
             ) {
                 Text(text = itemList[index])
