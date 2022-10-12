@@ -28,7 +28,7 @@ class MainActivity : ComponentActivity() {
 //            Button(onClick = { buttonClick() }) {
 //                Text(text = "Button")
 //            }
-            CardStorage(itemList = arrayListOf("a","a","a","a"))
+            CardStorage(itemList = arrayListOf("a", "a", "a", "a"))
         }
     }
 
@@ -44,20 +44,24 @@ fun CardStorage(itemList: ArrayList<String>) {
     val navController = rememberNavController()
 
     NavHost(navController = navController, startDestination = "vertical") {
-        composable("vertical") { CardStorageScreen(isVertical = true, itemList = itemList) {
-            navController.navigate("horizental") {
-                popUpTo("vertical"){
-                    inclusive = true
+        composable("vertical") {
+            CardStorageScreen(isVertical = true, itemList = itemList) {
+                navController.navigate("horizental") {
+                    popUpTo("vertical") {
+                        inclusive = true
+                    }
                 }
             }
-        } }
-        composable("horizental") { CardStorageScreen(isVertical = false, itemList = itemList) {
-            navController.navigate("vertical") {
-                popUpTo("horizental"){
-                    inclusive = true
+        }
+        composable("horizental") {
+            CardStorageScreen(isVertical = false, itemList = itemList) {
+                navController.navigate("vertical") {
+                    popUpTo("horizental") {
+                        inclusive = true
+                    }
                 }
             }
-        } }
+        }
     }
 }
 
