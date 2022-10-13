@@ -15,9 +15,6 @@ class CardStorageViewModel @Inject constructor(
 
     private val TAG = "CardStorageVM"
 
-    private val _vertical = SingleLiveEvent<Boolean>()
-    val vertical: LiveData<Boolean> get() = _vertical
-
     private val _cardList = SingleLiveEvent<ArrayList<String>>()
     val cardList: LiveData<ArrayList<String>> get() = _cardList
 
@@ -34,13 +31,9 @@ class CardStorageViewModel @Inject constructor(
     }
 
     private fun setCardListValue(frontUrlList: ArrayList<String>, backUrlList: ArrayList<String>) {
-        for (i in 0..frontUrlList.size){
+        for (i in 0..frontUrlList.size) {
             _cardList.value!!.add(frontUrlList[i])
             _cardList.value!!.add(backUrlList[i])
         }
-    }
-
-    fun setValue(boolean: Boolean) {
-        _vertical.value = boolean
     }
 }

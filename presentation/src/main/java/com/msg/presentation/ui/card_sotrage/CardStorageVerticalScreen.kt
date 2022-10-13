@@ -17,10 +17,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 
 @Composable
 @ExperimentalFoundationApi
-fun CardStorageVerticalScreen(itemList: ArrayList<String>, onClick:() -> Unit) {
+fun CardStorageVerticalScreen(itemList: ArrayList<String>, navController: NavHostController) {
     LazyVerticalGrid(cells = GridCells.Fixed(2), content = {
         items(itemList.size) { index ->
             Box(
@@ -30,7 +31,7 @@ fun CardStorageVerticalScreen(itemList: ArrayList<String>, onClick:() -> Unit) {
                     .background(Color.White)
                     .width(156.dp)
                     .height(258.dp)
-                    .clickable { onClick() },
+                    .clickable { navController.navigate("detail/${itemList[index]}") },
                 contentAlignment = Alignment.Center
             ) {
                 Text(text = itemList[index])

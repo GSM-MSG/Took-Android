@@ -28,7 +28,7 @@ class MainActivity : ComponentActivity() {
 //            Button(onClick = { buttonClick() }) {
 //                Text(text = "Button")
 //            }
-            CardStorage(itemList = arrayListOf("a", "a", "a", "a"))
+            CardStorage(itemList = arrayListOf("a1", "a2", "a3", "a4", "a5", "a6"))
         }
     }
 

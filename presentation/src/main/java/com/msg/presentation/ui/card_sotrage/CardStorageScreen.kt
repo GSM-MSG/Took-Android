@@ -9,9 +9,11 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.msg.presentation.ui.theme.Background
 import com.msg.presentation.ui.theme.Black3
 import com.msg.presentation.ui.theme.CardStorageAppBar
@@ -25,12 +27,8 @@ fun CardStorageScreen(isVertical: Boolean, itemList: ArrayList<String>, onClick:
     NavHost(navController = navController, startDestination = "cardList") {
         composable("cardList") {
             Background()
-            if (isVertical) CardStorageVerticalScreen(itemList) {
-                navController.navigate("detail")
-            }
-            else CardStorageHorizentalScreen(itemList) {
-                navController.navigate("detail")
-            }
+            if (isVertical) CardStorageVerticalScreen(itemList, navController)
+            else CardStorageHorizentalScreen(itemList, navController)
             Box(
                 modifier = Modifier
                     .background(Black3)
@@ -40,11 +38,14 @@ fun CardStorageScreen(isVertical: Boolean, itemList: ArrayList<String>, onClick:
             )
             CardStorageAppBar(vertical = isVertical, onClick = onClick)
         }
-        composable("detail") {
+        composable(
+            "detail/{url}", arguments = listOf(navArgument("url") { type = NavType.StringType })
+        ) {
+            val url = it.arguments?.getString("url")
             Background()
-            CardDetailPage(url = "") {
-                navController.navigate("cardList"){
-                    popUpTo("cardList"){
+            CardDetailPage(url = url!!) {
+                navController.navigate("cardList") {
+                    popUpTo("cardList") {
                         inclusive = true
                     }
                 }
